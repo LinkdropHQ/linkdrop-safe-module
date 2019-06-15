@@ -1,0 +1,22 @@
+{
+    "name": "linkdrop-safe-module",
+    "version": "1.0.0",
+    "description": "Linkdrop Module for Gnosis Safe Wallet",
+    "main": "index.js",
+    "author": "Amir Jumaniyazov <amir@linkdrop.io>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LinkdropProtocol/linkdrop-safe-module.git"
+    },
+    "bugs": {
+        "url": "https://github.com/LinkdropProtocol/linkdrop-safe-module/issues"
+    },
+    "keywords": [
+        "ethereum",
+        "linkdrop",
+        "gnosis",
+        "safe",
+        "wallet"
+    ]
+}
