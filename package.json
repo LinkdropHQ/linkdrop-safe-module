@@ -24,6 +24,7 @@
     ],
     "dependencies": {
         "@gnosis.pm/safe-contracts": "^1.0.0",
+        "ethereum-waffle": "^2.0.12",
         "ethers": "^4.0.30",
         "openzeppelin-solidity": "^2.3.0",
         "solc": "^0.5.9"
