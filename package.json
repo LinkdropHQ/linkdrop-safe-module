@@ -5,6 +5,9 @@
     "main": "index.js",
     "author": "Amir Jumaniyazov <amir@linkdrop.io>",
     "license": "MIT",
+    "scripts": {
+        "test": "mocha --require @babel/polyfill --require @babel/register"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/LinkdropProtocol/linkdrop-safe-module.git"
@@ -26,6 +29,15 @@
         "solc": "^0.5.9"
     },
     "devDependencies": {
+        "@babel/cli": "^7.4.4",
+        "@babel/core": "^7.4.5",
+        "@babel/node": "^7.4.5",
+        "@babel/polyfill": "^7.4.4",
+        "@babel/preset-env": "^7.4.5",
+        "@babel/register": "^7.4.4",
         "truffle": "4.1.15"
+    },
+    "standard": {
+        "parser": "babel-eslint"
     }
 }
