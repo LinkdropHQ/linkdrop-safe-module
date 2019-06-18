@@ -19,12 +19,13 @@
         "safe",
         "wallet"
     ],
-    "devDependencies": {
-        "truffle": "4.1.14"
-    },
     "dependencies": {
         "@gnosis.pm/safe-contracts": "^1.0.0",
         "ethers": "^4.0.30",
-        "openzeppelin-solidity": "^2.3.0"
+        "openzeppelin-solidity": "^2.3.0",
+        "solc": "^0.5.9"
+    },
+    "devDependencies": {
+        "truffle": "4.1.15"
     }
 }
