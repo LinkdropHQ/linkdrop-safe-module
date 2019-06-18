@@ -1,5 +1,7 @@
 pragma solidity ^0.5.0;
+import "@gnosis.pm/safe-contracts/contracts/base/OwnerManager.sol";
 import "./LinkdropERC20.sol";
+
 
 /**
 * @title Linkdrop Module for Gnosis Safe
@@ -11,36 +13,12 @@ contract LinkdropModule is LinkdropERC20 {
     string public constant VERSION = "0.1.0";
 
     // Function to setup the initial storage of module
-    function setup(address[] _linkdropSigners)
+    function setup(address[] memory _linkdropSigners)
     public
     {
         setManager();
         for (uint256 i = 0; i < _linkdropSigners.length; i++)
             isLinkdropSigner[_linkdropSigners[i]] = true;
-    }
-
-    /**
-    * @dev Indicates whether a link is claimed or not
-    * @param _linkId Address corresponding to link key
-    * @return True if claimed
-    */
-    function isClaimedLink(address _linkId)
-    public view
-    returns (bool)
-    {
-        return claimedTo[_linkId] != address(0);
-    }
-
-    /**
-    * @dev Indicates whether a link is canceled or not
-    * @param _linkId Address corresponding to link key
-    * @return True if canceled
-    */
-    function isCanceledLink(address _linkId)
-    public view
-    returns (bool)
-    {
-        return isCanceled[_linkId];
     }
 
     /**
@@ -66,7 +44,7 @@ contract LinkdropModule is LinkdropERC20 {
     */
     function addSigner(address _linkdropSigner)
     external
-    authorised
+    authorized
     returns (bool)
     {
         require(_linkdropSigner != address(0), "Invalid address");
@@ -81,7 +59,7 @@ contract LinkdropModule is LinkdropERC20 {
     */
     function removeSigner(address _linkdropSigner)
     external
-    authorised
+    authorized
     returns (bool)
     {
         require(isLinkdropSigner[_linkdropSigner], "Invalid address");

@@ -2,9 +2,9 @@ pragma solidity ^0.5.0;
 import "openzeppelin-solidity/contracts/cryptography/ECDSA.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import "@gnosis.pm/safe-contracts/contracts/base/Module.sol";
-import "./Storage.sol";
+import "./LinkdropCommon.sol";
 
-contract LinkdropERC20 is Module, Storage {
+contract LinkdropERC20 is Module, LinkdropCommon {
 
     /**
     * @dev Function to verify the signature provided by linkdrop signer
@@ -25,7 +25,7 @@ contract LinkdropERC20 is Module, Storage {
         address _linkId,
         bytes memory _signature
     )
-    internal
+    internal view
     returns (bool)
     {
         bytes32 prefixedHash = ECDSA.toEthSignedMessageHash
@@ -128,8 +128,6 @@ contract LinkdropERC20 is Module, Storage {
                 _tokenAddress,
                 _tokenAmount,
                 _expiration,
-                version,
-                chainId,
                 _linkId,
                 _linkdropSignerSignature
             ),
