@@ -116,7 +116,6 @@ describe('Linkdrop Module Tests', () => {
     console.log(gnosisSafe.address)
 
     expect(await linkdropModule.manager()).to.equal(gnosisSafe.address)
-    // уч.equal(await whitelistModule.manager.call(), gnosisSafe.address)
   })
 
   it('', async () => {})
