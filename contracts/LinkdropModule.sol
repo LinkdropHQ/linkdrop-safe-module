@@ -1,12 +1,13 @@
 pragma solidity ^0.5.0;
 import "@gnosis.pm/safe-contracts/contracts/base/OwnerManager.sol";
 import "./LinkdropERC20.sol";
+import "./LinkdropERC721.sol";
 
 /**
 * @title Linkdrop Module for Gnosis Safe
 * @author Amir Jumaniyazov - <amir@linkdrop.io>
 */
-contract LinkdropModule is LinkdropERC20 {
+contract LinkdropModule is LinkdropERC20, LinkdropERC721 {
 
     string public constant NAME = "Linkdrop Module";
     string public constant VERSION = "0.1.0";
