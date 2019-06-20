@@ -31,18 +31,15 @@ let [deployer, ownerOne, ownerTwo, linkdropSigner] = getWallets(provider)
 describe('Linkdrop Module Tests', () => {
   before(async () => {
     let proxyFactory = await deployContract(deployer, ProxyFactory)
-    console.log('proxyFactory: ', proxyFactory.address)
 
     let createAndAddModules = await deployContract(
       deployer,
       CreateAndAddModules
     )
-    console.log('createAndAddModules: ', createAndAddModules.address)
 
     let gnosisSafeMasterCopy = await deployContract(deployer, GnosisSafe, [], {
       gasLimit: 6500000
     })
-    console.log('gnosisSafeMasterCopy: ', gnosisSafeMasterCopy.address)
 
     // Initialize Safe master copy
     await gnosisSafeMasterCopy.setup(
@@ -55,31 +52,31 @@ describe('Linkdrop Module Tests', () => {
       ADDRESS_ZERO // payment receiver address
     )
 
-    let linkdropModuleMasterCopy = await deployContract(
+    const linkdropModuleMasterCopy = await deployContract(
       deployer,
       LinkdropModule
     )
-    console.log('linkdropModuleMasterCopy: ', linkdropModuleMasterCopy.address)
 
-    // Create Gnosis Safe and Whitelist Module in one transactions
-    let moduleData = utils.getData(linkdropModuleMasterCopy, 'setup', [
+    const moduleData = utils.getData(linkdropModuleMasterCopy, 'setup', [
       linkdropSigner.address
     ])
 
-    let proxyFactoryData = utils.getData(proxyFactory, 'createProxy', [
+    const proxyFactoryData = utils.getData(proxyFactory, 'createProxy', [
       linkdropModuleMasterCopy.address,
       moduleData
     ])
 
-    let modulesCreationData = utils.createAndAddModulesData([proxyFactoryData])
+    const modulesCreationData = utils.createAndAddModulesData([
+      proxyFactoryData
+    ])
 
-    let createAndAddModulesData = utils.getData(
+    const createAndAddModulesData = utils.getData(
       createAndAddModules,
       'createAndAddModules',
       [proxyFactory.address, modulesCreationData]
     )
 
-    let gnosisSafeData = utils.getData(gnosisSafeMasterCopy, 'setup', [
+    const gnosisSafeData = utils.getData(gnosisSafeMasterCopy, 'setup', [
       [ownerOne.address, ownerTwo.address, deployer.address], // owners
       2, // treshold
       createAndAddModules.address, // to
@@ -99,21 +96,16 @@ describe('Linkdrop Module Tests', () => {
       'proxy', // paramName
       proxyFactory // contract
     )
-    console.log('Gnosis safe proxy address: ', proxy)
 
     const gnosisSafe = new ethers.Contract(proxy, GnosisSafe.abi, provider)
 
-    let modules = await gnosisSafe.getModules()
-    console.log('Linkdrop module address: ', modules[0])
+    const modules = await gnosisSafe.getModules()
 
-    let linkdropModule = new ethers.Contract(
+    const linkdropModule = new ethers.Contract(
       modules[0],
       LinkdropModule.abi,
       provider
     )
-
-    console.log(await linkdropModule.manager())
-    console.log(gnosisSafe.address)
 
     expect(await linkdropModule.manager()).to.equal(gnosisSafe.address)
   })
