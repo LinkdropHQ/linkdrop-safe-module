@@ -14,10 +14,22 @@
 
 > Linkdrop Module for Gnosis Safe Wallet
 
-## Install
+## Install dependencies
 
 ```sh
 yarn install
+```
+
+## Compile contracts
+
+```sh
+npx waffle
+```
+
+## Test contracts
+
+```sh
+yarn test
 ```
 
 ## Contributors
