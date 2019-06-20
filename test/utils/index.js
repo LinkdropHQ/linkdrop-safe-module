@@ -1,7 +1,5 @@
 import { ethers } from 'ethers'
 
-const ADDRESS_ONE = '0x0000000000000000000000000000000000000001'
-
 export const createAndAddModulesData = dataArray => {
   const moduleDataWrapper = new ethers.utils.Interface([
     'function setup(bytes data)'
@@ -16,15 +14,24 @@ export const createAndAddModulesData = dataArray => {
 }
 
 /**
- * @dev Function to get data from functions
- * @param contract - contract instance compatible with ethers.js
- * @param method - string of function name
- * @param params - array of function parameters
+ * @dev Function to get encoded params data
+ * @param contract Contract instance compatible with ethers.js library
+ * @param method String of function name
+ * @param params Array of function params to be encoded
+ * @return Encoded params data
  */
 export const getData = (contract, method, params) => {
   return contract.interface.functions[method].encode([...params])
 }
 
+/**
+ * @dev Function to get specific param from transaction event
+ * @param tx Transaction object compatible with ethers.js library
+ * @param eventName Event name to parse param from
+ * @param paramName Parameter to be retrieved from event log
+ * @param contract Contract instance compatible with ethers.js library
+ * @return Parameter parsed from transaction event
+ */
 export const getParamFromTxEvent = async (
   tx,
   eventName,

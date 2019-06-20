@@ -58,7 +58,7 @@ describe('Linkdrop Module Tests', () => {
     )
 
     const moduleData = utils.getData(linkdropModuleMasterCopy, 'setup', [
-      linkdropSigner.address
+      [linkdropSigner.address]
     ])
 
     const proxyFactoryData = utils.getData(proxyFactory, 'createProxy', [

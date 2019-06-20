@@ -14,13 +14,14 @@ contract LinkdropModule is LinkdropERC20, LinkdropERC721 {
 
     /**
     * @dev Function to setup the initial storage of module
-    * @param _linkdropSigner Address of linkdrop signer
+    * @param _linkdropSigners Array of linkdrop signer addresses
     */
-    function setup(address _linkdropSigner)
+    function setup(address[] memory _linkdropSigners)
     public
     {
         setManager();
-        isLinkdropSigner[_linkdropSigner] = true;
+        for(uint i = 0; i < _linkdropSigners.length; i++)
+            isLinkdropSigner[_linkdropSigners[i]] = true;
     }
 
     /**
