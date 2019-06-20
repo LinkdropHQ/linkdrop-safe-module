@@ -27,7 +27,8 @@
         "ethereum-waffle": "^2.0.12",
         "ethers": "^4.0.30",
         "openzeppelin-solidity": "^2.3.0",
-        "solc": "^0.5.9"
+        "solc": "^0.5.9",
+        "web3": "0.20.6"
     },
     "devDependencies": {
         "@babel/cli": "^7.4.4",
@@ -36,6 +37,7 @@
         "@babel/polyfill": "^7.4.4",
         "@babel/preset-env": "^7.4.5",
         "@babel/register": "^7.4.4",
+        "chai": "^4.2.0",
         "truffle": "4.1.15"
     },
     "standard": {

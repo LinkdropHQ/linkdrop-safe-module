@@ -3,6 +3,10 @@ import "openzeppelin-solidity/contracts/cryptography/ECDSA.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import "./LinkdropCommon.sol";
 
+/**
+* @title ERC20 compatible functionality for Lindkrop
+* @author Amir Jumaniyazov - <amir@linkdrop.io>
+*/
 contract LinkdropERC20 is LinkdropCommon {
 
     /**
