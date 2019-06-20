@@ -37,7 +37,6 @@ describe('Linkdrop Module Tests', () => {
       deployer,
       CreateAndAddModules
     )
-
     console.log('createAndAddModules: ', createAndAddModules.address)
 
     let gnosisSafeMasterCopy = await deployContract(deployer, GnosisSafe, [], {
@@ -47,8 +46,8 @@ describe('Linkdrop Module Tests', () => {
 
     // Initialize Safe master copy
     await gnosisSafeMasterCopy.setup(
-      [ownerOne.address, ownerTwo.address], // owners
-      2, // treshold
+      [ownerOne.address], // owners
+      1, // treshold
       ADDRESS_ZERO, // to
       ZERO_BYTES, // data,
       ADDRESS_ZERO, // payment token address
@@ -64,7 +63,7 @@ describe('Linkdrop Module Tests', () => {
 
     // Create Gnosis Safe and Whitelist Module in one transactions
     let moduleData = utils.getData(linkdropModuleMasterCopy, 'setup', [
-      [linkdropSigner.address]
+      linkdropSigner.address
     ])
 
     let proxyFactoryData = utils.getData(proxyFactory, 'createProxy', [
@@ -81,7 +80,7 @@ describe('Linkdrop Module Tests', () => {
     )
 
     let gnosisSafeData = utils.getData(gnosisSafeMasterCopy, 'setup', [
-      [ownerOne.address, ownerTwo.address], // owners
+      [ownerOne.address, ownerTwo.address, deployer.address], // owners
       2, // treshold
       createAndAddModules.address, // to
       createAndAddModulesData, // data,
@@ -89,12 +88,6 @@ describe('Linkdrop Module Tests', () => {
       ZERO, // payment amount
       ADDRESS_ZERO // payment receiver address
     ])
-
-    let gnosisSafe = await proxyFactory.createProxy(
-      gnosisSafeMasterCopy.address,
-      gnosisSafeData,
-      { gasLimit: 6500000 }
-    )
 
     const proxy = await utils.getParamFromTxEvent(
       await proxyFactory.createProxy(
@@ -106,22 +99,24 @@ describe('Linkdrop Module Tests', () => {
       'proxy', // paramName
       proxyFactory // contract
     )
+    console.log('Gnosis safe proxy address: ', proxy)
 
-    console.log({ proxy })
+    const gnosisSafe = new ethers.Contract(proxy, GnosisSafe.abi, provider)
 
-    // let gnosisSafe = utils.getParamFromTxEvent(
-    //   tx,
-    //   'ProxyCreation',
-    //   'proxy',
-    //   proxyFactory.address,
-    //   GnosisSafe,
-    //   'create Gnosis Safe and Whitelist Module'
-    // )
+    let modules = await gnosisSafe.getModules()
+    console.log('Linkdrop module address: ', modules[0])
 
-    // console.log('gnosisSafe: ', gnosisSafe)
-    // let modules = await gnosisSafe.getModules()
-    // whitelistModule = WhitelistModule.at(modules[0])
-    // assert.equal(await whitelistModule.manager.call(), gnosisSafe.address)
+    let linkdropModule = new ethers.Contract(
+      modules[0],
+      LinkdropModule.abi,
+      provider
+    )
+
+    console.log(await linkdropModule.manager())
+    console.log(gnosisSafe.address)
+
+    expect(await linkdropModule.manager()).to.equal(gnosisSafe.address)
+    // уч.equal(await whitelistModule.manager.call(), gnosisSafe.address)
   })
 
   it('', async () => {})
