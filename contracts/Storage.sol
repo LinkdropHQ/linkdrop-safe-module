@@ -1,9 +1,6 @@
 pragma solidity ^0.5.6;
-import "@gnosis.pm/safe-contracts/contracts/base/ModuleManager.sol";
 
 contract Storage {
-
-    ModuleManager public manager;
 
     mapping (address => address) claimedTo;
     mapping (address => bool) isCanceled;

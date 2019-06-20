@@ -1,5 +1,4 @@
 import { ethers } from 'ethers'
-import assert from 'assert'
 
 const ADDRESS_ONE = '0x0000000000000000000000000000000000000001'
 

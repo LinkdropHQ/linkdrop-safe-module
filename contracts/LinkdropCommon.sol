@@ -1,7 +1,8 @@
 pragma solidity ^0.5.6;
+import "@gnosis.pm/safe-contracts/contracts/base/Module.sol";
 import "./Storage.sol";
 
-contract LinkdropCommon is Storage {
+contract LinkdropCommon is Module, Storage {
 
     /**
     * @dev Indicates whether a link is claimed or not
@@ -26,6 +27,5 @@ contract LinkdropCommon is Storage {
     {
         return isCanceled[_linkId];
     }
-
 
 }
