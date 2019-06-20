@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Linkdrop Gnosis Safe Module</h1>
+<h1 align="center">Welcome to Linkdrop Module for Gnosis Safe</h1>
 <p>
   <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/LinkdropProtocol/linkdrop-safe-module#readme">
@@ -12,7 +12,6 @@
   </a>
 </p>
 
-> Linkdrop Module for Gnosis Safe Wallet
 
 ## Install dependencies
 
@@ -49,5 +48,5 @@ Give a ✨ if this project helped you !
 
 ## License
 
-Copyright © 2019 [Linkdrop Labs, Inc. &lt;hi@linkdrop.io&gt;](https://github.com/LinkdropProtocol).<br />
+Copyright © 2019 [Linkdrop Labs, Inc.](https://github.com/LinkdropProtocol) &lt;hi@linkdrop.io&gt;.<br />
 This project is [MIT](https://github.com/LinkdropProtocol/linkdrop-safe-module/blob/master/LICENSE) licensed.
