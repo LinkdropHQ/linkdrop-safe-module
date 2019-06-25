@@ -64,7 +64,13 @@ contract LinkdropERC721 is LinkdropCommon {
     public pure
     returns (bool)
     {
-        bytes32 prefixedHash = ECDSA.toEthSignedMessageHash(keccak256(abi.encodePacked(_receiver)));
+        bytes32 prefixedHash = ECDSA.toEthSignedMessageHash
+        (
+            keccak256
+            (
+                abi.encodePacked(_receiver)
+            )
+        );
         address signer = ECDSA.recover(prefixedHash, _signature);
         return signer == _linkId;
     }
@@ -108,8 +114,8 @@ contract LinkdropERC721 is LinkdropCommon {
         // Make sure link is not expired
         require(_expiration >= now, "Expired link");
 
-        // Make sure eth amount is available for this contract
-        require(address(manager).balance >= _weiAmount, "Insufficient amount of eth");
+        // Make sure ethers amount is available for this contract
+        require(address(manager).balance >= _weiAmount, "Insufficient amount of ethers");
 
         // Make sure nft is available for this contract
         require(IERC721(_nftAddress).ownerOf(_tokenId) == address(manager), "Unavailable token");

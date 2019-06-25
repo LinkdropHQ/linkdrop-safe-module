@@ -25,12 +25,12 @@ export const getData = (contract, method, params) => {
 }
 
 /**
- * @dev Function to get specific param from transaction event
- * @param tx Transaction object compatible with ethers.js library
- * @param eventName Event name to parse param from
- * @param paramName Parameter to be retrieved from event log
- * @param contract Contract instance compatible with ethers.js library
- * @return Parameter parsed from transaction event
+ * Function to get specific param from transaction event
+ * @param {Object} tx Transaction object compatible with ethers.js library
+ * @param {String} eventName Event name to parse param from
+ * @param {String} paramName Parameter to be retrieved from event log
+ * @param {Object} contract Contract instance compatible with ethers.js library
+ * @return {String} Parameter parsed from transaction event
  */
 export const getParamFromTxEvent = async (
   tx,
@@ -51,30 +51,48 @@ export const getParamFromTxEvent = async (
   return param
 }
 
+/**
+ *
+ * @param {Object} linkdropSigner Ethers.js wallet
+ * @param {Number} weiAmount Amount of wei
+ * @param {String} tokenAddress Address of token contract
+ * @param {Number} tokenAmount Amount of tokens
+ * @param {Number} expiration Link expiration timestamp
+ * @param {String} linkId Link id
+ * @return {String} signature
+ */
 const signLink = async function (
   linkdropSigner, // Wallet
   weiAmount,
   tokenAddress,
   tokenAmount,
-  expirationTime,
+  expiration,
   linkId
 ) {
   let messageHash = ethers.utils.solidityKeccak256(
     ['uint', 'address', 'uint', 'uint', 'address'],
-    [weiAmount, tokenAddress, tokenAmount, expirationTime, linkId]
+    [weiAmount, tokenAddress, tokenAmount, expiration, linkId]
   )
   let messageHashToSign = ethers.utils.arrayify(messageHash)
   let signature = await linkdropSigner.signMessage(messageHashToSign)
   return signature
 }
 
-// Generates new link
+/**
+ *
+ * @param {Object} linkdropSigner Ethers.js wallet
+ * @param {Number} weiAmount
+ * @param {String} tokenAddress
+ * @param {Number} tokenAmount
+ * @param {Number} expiration
+ * @return {Object} `{linkKey, linkId, linkdropSignerSignature}`
+ */
 export const createLink = async function (
   linkdropSigner, // Wallet
   weiAmount,
   tokenAddress,
   tokenAmount,
-  expirationTime
+  expiration
 ) {
   let linkWallet = ethers.Wallet.createRandom()
   let linkKey = linkWallet.privateKey
@@ -85,7 +103,7 @@ export const createLink = async function (
     weiAmount,
     tokenAddress,
     tokenAmount,
-    expirationTime,
+    expiration,
     linkId
   )
 
@@ -96,6 +114,12 @@ export const createLink = async function (
   }
 }
 
+/**
+ * Function to sign receiver address
+ * @param {String} linkKey Link's ephemeral private key
+ * @param {String} receiverAddress Address of receiver
+ * @return {String} signature
+ */
 export const signReceiverAddress = async function (linkKey, receiverAddress) {
   let wallet = new ethers.Wallet(linkKey)
   let messageHash = ethers.utils.solidityKeccak256(
