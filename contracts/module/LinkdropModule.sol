@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 import "@gnosis.pm/safe-contracts/contracts/base/OwnerManager.sol";
-import "./LinkdropERC20.sol";
-import "./LinkdropERC721.sol";
+import "../linkdrop/LinkdropERC20.sol";
+import "../linkdrop/LinkdropERC721.sol";
 
 /**
 * @title Linkdrop Module for Gnosis Safe
