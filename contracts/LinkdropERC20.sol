@@ -61,7 +61,7 @@ contract LinkdropERC20 is LinkdropCommon {
         address _receiver,
         bytes memory _signature
     )
-    public pure
+    internal pure
     returns (bool)
     {
         bytes32 prefixedHash = ECDSA.toEthSignedMessageHash(keccak256(abi.encodePacked(_receiver)));
@@ -110,7 +110,7 @@ contract LinkdropERC20 is LinkdropCommon {
         require(_expiration >= now, "Expired link");
 
         // Make sure eth amount is available for this contract
-        require(address(manager).balance >= _weiAmount, "Insufficient amount of eth");
+        require(address(manager).balance >= _weiAmount, "Insufficient amount of ethers");
 
         // Make sure tokens are available for this contract
         if (_tokenAddress != address(0)) {

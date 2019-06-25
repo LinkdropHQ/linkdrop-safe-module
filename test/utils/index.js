@@ -15,9 +15,9 @@ export const createAndAddModulesData = dataArray => {
 
 /**
  * @dev Function to get encoded params data
- * @param contract Contract instance compatible with ethers.js library
- * @param method String of function name
- * @param params Array of function params to be encoded
+ * @param {Object} contract Contract instance compatible with ethers.js library
+ * @param {String} method Function name
+ * @param {Array<T>} params Array of function params to be encoded
  * @return Encoded params data
  */
 export const getData = (contract, method, params) => {
@@ -49,4 +49,60 @@ export const getParamFromTxEvent = async (
     paramName
   ]
   return param
+}
+
+const signLink = async function (
+  linkdropSigner, // Wallet
+  weiAmount,
+  tokenAddress,
+  tokenAmount,
+  expirationTime,
+  linkId
+) {
+  let messageHash = ethers.utils.solidityKeccak256(
+    ['uint', 'address', 'uint', 'uint', 'address'],
+    [weiAmount, tokenAddress, tokenAmount, expirationTime, linkId]
+  )
+  let messageHashToSign = ethers.utils.arrayify(messageHash)
+  let signature = await linkdropSigner.signMessage(messageHashToSign)
+  return signature
+}
+
+// Generates new link
+export const createLink = async function (
+  linkdropSigner, // Wallet
+  weiAmount,
+  tokenAddress,
+  tokenAmount,
+  expirationTime
+) {
+  let linkWallet = ethers.Wallet.createRandom()
+  let linkKey = linkWallet.privateKey
+  let linkId = linkWallet.address
+
+  let linkdropSignerSignature = await signLink(
+    linkdropSigner,
+    weiAmount,
+    tokenAddress,
+    tokenAmount,
+    expirationTime,
+    linkId
+  )
+
+  return {
+    linkKey, // link's ephemeral private key
+    linkId, // address corresponding to link key
+    linkdropSignerSignature // signed by linkdrop verifier
+  }
+}
+
+export const signReceiverAddress = async function (linkKey, receiverAddress) {
+  let wallet = new ethers.Wallet(linkKey)
+  let messageHash = ethers.utils.solidityKeccak256(
+    ['address'],
+    [receiverAddress]
+  )
+  let messageHashToSign = ethers.utils.arrayify(messageHash)
+  let signature = await wallet.signMessage(messageHashToSign)
+  return signature
 }
