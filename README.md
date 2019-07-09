@@ -49,4 +49,4 @@ Give a ✨ if this project helped you !
 ## License
 
 Copyright © 2019 [Linkdrop Labs, Inc.](https://github.com/LinkdropProtocol) &lt;hi@linkdrop.io&gt;.<br />
-This project is [MIT](https://github.com/LinkdropProtocol/linkdrop-safe-module/blob/master/LICENSE) licensed.
+This project is [GPL-3](https://github.com/LinkdropProtocol/linkdrop-safe-module/blob/master/LICENSE) licensed.
