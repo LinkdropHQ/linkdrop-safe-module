@@ -274,7 +274,7 @@ describe('Linkdrop Module Tests', () => {
         weiAmount,
         nftAddress,
         tokenId,
-        expiration
+        expiredTimestamp
       )
 
       receiverAddress = ethers.Wallet.createRandom().address
@@ -331,17 +331,11 @@ describe('Linkdrop Module Tests', () => {
     })
 
     it('should fail to claim link with fake receiver signature', async () => {
-      let fakeLink = await createLink(
-        linkdropSigner,
-        weiAmount,
-        nftAddress,
-        tokenId,
-        expiration
-      )
+      let fakeReceiver = ethers.Wallet.createRandom()
 
       receiverAddress = ethers.Wallet.createRandom().address
       let fakeReceiverSignature = await signReceiverAddress(
-        fakeLink.linkKey,
+        fakeReceiver.privateKey,
         receiverAddress
       )
 
