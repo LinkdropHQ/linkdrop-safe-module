@@ -6,6 +6,7 @@
     "author": "Amir Jumaniyazov <amir@linkdrop.io>",
     "license": "MIT",
     "scripts": {
+        "compile": "npx waffle",
         "test": "mocha --require @babel/polyfill --require @babel/register"
     },
     "repository": {

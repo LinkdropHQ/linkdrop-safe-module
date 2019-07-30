@@ -22,7 +22,7 @@ yarn install
 ## Compile contracts
 
 ```sh
-npx waffle
+yarn compile
 ```
 
 ## Test contracts
