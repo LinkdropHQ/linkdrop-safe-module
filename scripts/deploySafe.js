@@ -61,6 +61,7 @@ const main = async () => {
     { gasLimit: 6500000 }
   )
 
+  console.log('Tx hash:', tx.hash)
   tx.wait(1)
 
   const safeProxyAddress = await getParamFromTxEvent(
