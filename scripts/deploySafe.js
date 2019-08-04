@@ -1,18 +1,8 @@
 import GnosisSafe from '../build/GnosisSafe'
-import PayingProxy from '../build/PayingProxy'
+import ProxyFactory from '../build/ProxyFactory'
+import { getData, getParamFromTxEvent } from './utils'
 
 const ethers = require('ethers')
-
-/**
- * @dev Function to get encoded params data
- * @param {Object} contract Contract instance compatible with ethers.js library
- * @param {String} method Function name
- * @param {Array<T>} params Array of function params to be encoded
- * @return Encoded params data
- */
-export const getData = (contract, method, params) => {
-  return contract.interface.functions[method].encode([...params])
-}
 
 const mnemonic =
   'regular dose swallow wear surround hidden turtle unhappy galaxy trend expand life'
@@ -35,12 +25,8 @@ const ADDRESS_ZERO = ethers.constants.AddressZero
 const BYTES_ZERO = '0x'
 
 const main = async () => {
-  await wallet.connect(provider)
-
-  const masterCopyAddress = '0xb6029EA3B2c51D09a50B53CA8012FeEB05bDa35A' // from https://safe-relay.gnosis.pm/api/v1/about/
-
   const gnosisSafeMasterCopy = new ethers.Contract(
-    masterCopyAddress,
+    '0xb6029EA3B2c51D09a50B53CA8012FeEB05bDa35A', // from https://safe-relay.gnosis.pm/api/v1/about/,
     GnosisSafe.abi,
     wallet
   )
@@ -61,26 +47,29 @@ const main = async () => {
 
   console.log('gnosisSafeData: ', gnosisSafeData)
 
-  const factory = new ethers.ContractFactory(
-    PayingProxy.abi,
-    PayingProxy.bytecode,
+  const proxyFactory = new ethers.Contract(
+    '0x12302fE9c02ff50939BaAaaf415fc226C078613C', // from https://safe-relay.gnosis.pm/api/v1/about/,
+    ProxyFactory.abi,
     wallet
   )
 
-  const safeProxy = await factory.deploy(
-    masterCopyAddress,
+  const creationNonce = new Date().getTime()
+  const tx = await proxyFactory.createProxyWithNonce(
+    gnosisSafeMasterCopy.address,
     gnosisSafeData,
-    ADDRESS_ZERO,
-    ADDRESS_ZERO,
-    0,
-    {
-      gasLimit: 6700000,
-      gasPrice: ethers.utils.parseUnits('10', 'gwei')
-    }
+    creationNonce,
+    { gasLimit: 6500000 }
   )
 
-  console.log('safeProxy: ', safeProxy.address)
+  tx.wait(1)
 
-  const safe = new ethers.Contract(safeProxy.address, GnosisSafe.abi, provider)
+  const safeProxyAddress = await getParamFromTxEvent(
+    tx, // tx
+    'ProxyCreation', // eventName
+    'proxy', // paramName
+    proxyFactory // contract
+  )
+
+  console.log('safeProxyAddress: ', safeProxyAddress)
 }
 main()
