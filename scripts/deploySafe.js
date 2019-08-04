@@ -67,7 +67,7 @@ const main = async () => {
     wallet
   )
 
-  const payingProxy = await factory.deploy(
+  const safeProxy = await factory.deploy(
     masterCopyAddress,
     gnosisSafeData,
     ADDRESS_ZERO,
@@ -79,9 +79,8 @@ const main = async () => {
     }
   )
 
-  const payingProxyAddr = payingProxy.address
-  console.log('payingProxyAddr: ', payingProxyAddr)
+  console.log('safeProxy: ', safeProxy.address)
 
-  const safe = new ethers.Contract(payingProxyAddr, GnosisSafe.abi, provider)
+  const safe = new ethers.Contract(safeProxy.address, GnosisSafe.abi, provider)
 }
 main()
