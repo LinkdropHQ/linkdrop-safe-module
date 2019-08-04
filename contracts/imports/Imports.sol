@@ -5,3 +5,4 @@ import "@gnosis.pm/safe-contracts/contracts/base/OwnerManager.sol";
 import "@gnosis.pm/safe-contracts/contracts/libraries/CreateAndAddModules.sol";
 import "@gnosis.pm/safe-contracts/contracts/GnosisSafe.sol";
 import "@gnosis.pm/safe-contracts/contracts/proxies/ProxyFactory.sol";
+import "@gnosis.pm/safe-contracts/contracts/proxies/PayingProxy.sol";

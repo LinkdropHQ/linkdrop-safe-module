@@ -67,8 +67,8 @@ describe('Linkdrop Module Tests', () => {
 
       // Initialize Safe master copy
       await gnosisSafeMasterCopy.setup(
-        [firstOwner.address, secondOwner.address], // owners
-        2, // treshold
+        ['0x0000000000000000000000000000000000000002'], // owners
+        1, // treshold
         ADDRESS_ZERO, // to
         ZERO_BYTES, // data,
         ADDRESS_ZERO, // payment token address
