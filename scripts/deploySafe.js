@@ -31,13 +31,19 @@ const main = async () => {
     wallet
   )
 
+  const owners = [
+    '0x83793703bA5D7f0c09970eBD00568B5A2b961d41',
+    '0xc23a3961c173D46eeaf17876c547aE8ecda96d16',
+    '0xdE466f343c58a519dBD43D547693532Ae0cfFAeE'
+  ]
+  console.log('owners: ', owners)
+
+  const threshold = 1
+  console.log('threshold: ', threshold)
+
   const gnosisSafeData = getData(gnosisSafeMasterCopy, 'setup', [
-    [
-      '0x83793703bA5D7f0c09970eBD00568B5A2b961d41',
-      '0xc23a3961c173D46eeaf17876c547aE8ecda96d16',
-      '0xdE466f343c58a519dBD43D547693532Ae0cfFAeE'
-    ], // owners
-    1, // treshold
+    owners, // owners
+    threshold, // treshold
     ADDRESS_ZERO, // to
     BYTES_ZERO, // data,
     ADDRESS_ZERO, // payment token address
@@ -54,11 +60,13 @@ const main = async () => {
   )
 
   const creationNonce = new Date().getTime()
+  console.log('creationNonce: ', creationNonce)
+
   const tx = await proxyFactory.createProxyWithNonce(
     gnosisSafeMasterCopy.address,
     gnosisSafeData,
     creationNonce,
-    { gasLimit: 6500000 }
+    { gasLimit: 6500000, gasPrice: ethers.utils.parseUnits('10', 'gwei') }
   )
 
   console.log('Tx hash:', tx.hash)
