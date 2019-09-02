@@ -24,6 +24,9 @@ export const getData = (contract, method, params) => {
   return contract.interface.functions[method].encode([...params])
 }
 
+export const getData2 = (abi, method, params) => {
+  return new ethers.utils.Interface(abi).functions[method].encode([...params])
+}
 /**
  * Function to get specific param from transaction event
  * @param {Object} tx Transaction object compatible with ethers.js library

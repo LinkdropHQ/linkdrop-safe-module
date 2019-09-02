@@ -22,6 +22,8 @@ const address = wallet.signingKey.address
 console.log('wallet: ', address)
 
 const ADDRESS_ZERO = ethers.constants.AddressZero
+console.log('ADDRESS_ZERO: ', ADDRESS_ZERO)
+
 const BYTES_ZERO = '0x'
 
 const main = async () => {
@@ -47,7 +49,7 @@ const main = async () => {
     ADDRESS_ZERO, // to
     BYTES_ZERO, // data,
     ADDRESS_ZERO, // payment token address
-    0, // payment amount
+    3015560000301556, // payment amount
     ADDRESS_ZERO // payment receiver address
   ])
 
@@ -58,6 +60,9 @@ const main = async () => {
     ProxyFactory.abi,
     wallet
   )
+
+  const code = await proxyFactory.proxyCreationCode()
+  console.log('code: ', code)
 
   const creationNonce = new Date().getTime()
   console.log('creationNonce: ', creationNonce)
