@@ -1,6 +1,6 @@
 {
-    "name": "contracts",
-    "version": "0.0.0",
+    "name": "@linkdrop-safe-module/contracts",
+    "version": "1.0.0",
     "description": "Smart contracts for Linkdrop Safe Module",
     "main": "index.js",
     "author": "Amir Jumaniyazov <amir@linkdrop.io>",
