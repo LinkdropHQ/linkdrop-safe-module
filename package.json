@@ -7,7 +7,8 @@
     "license": "MIT",
     "scripts": {
         "compile-contracts": "cd packages/contracts && npx waffle",
-        "test": "cd packages/contracts && mocha --require @babel/polyfill --require @babel/register"
+        "test": "cd packages/contracts && mocha --require @babel/polyfill --require @babel/register",
+        "server": "cd packages/relayer && yarn start"
     },
     "repository": {
         "type": "git",
