@@ -34,6 +34,34 @@ export const claim = async (req, res) => {
     receiverSignature
   } = req.body
 
+  if (weiAmount == null || weiAmount === '') {
+    throw new Error('weiAmount param is required')
+  }
+  if (tokenAddress == null || tokenAddress === '') {
+    throw new Error('tokenAddress param is required')
+  }
+  if (tokenAmount == null || tokenAmount === '') {
+    throw new Error('tokenAmount param is required')
+  }
+  if (expirationTime == null || expirationTime === '') {
+    throw new Error('expirationTime param is required')
+  }
+  if (linkId == null || linkId === '') {
+    throw new Error('linkId param is required')
+  }
+  if (senderAddress == null || senderAddress === '') {
+    throw new Error('senderAddress param is required')
+  }
+  if (senderSignature == null || senderSignature === '') {
+    throw new Error('senderSignature param is required')
+  }
+  if (receiverAddress == null || receiverAddress === '') {
+    throw new Error('receiverAddress param is required')
+  }
+  if (receiverSignature == null || receiverSignature === '') {
+    throw new Error('receiverSignature param is required')
+  }
+
   const linkdropModule = new ethers.Contract(
     senderAddress,
     LinkdropModule.abi,
@@ -149,6 +177,34 @@ export const claimERC721 = async (req, res) => {
     receiverAddress,
     receiverSignature
   } = req.body
+
+  if (weiAmount == null || weiAmount === '') {
+    throw new Error('weiAmount param is required')
+  }
+  if (nftAddress == null || nftAddress === '') {
+    throw new Error('nftAddress param is required')
+  }
+  if (tokenId == null || tokenId === '') {
+    throw new Error('tokenId param is required')
+  }
+  if (expirationTime == null || expirationTime === '') {
+    throw new Error('expirationTime param is required')
+  }
+  if (linkId == null || linkId === '') {
+    throw new Error('linkId param is required')
+  }
+  if (senderAddress == null || senderAddress === '') {
+    throw new Error('senderAddress param is required')
+  }
+  if (senderSignature == null || senderSignature === '') {
+    throw new Error('senderSignature param is required')
+  }
+  if (receiverAddress == null || receiverAddress === '') {
+    throw new Error('receiverAddress param is required')
+  }
+  if (receiverSignature == null || receiverSignature === '') {
+    throw new Error('receiverSignature param is required')
+  }
 
   const linkdropModule = new ethers.Contract(
     senderAddress,
