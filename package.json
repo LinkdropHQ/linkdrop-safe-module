@@ -6,7 +6,7 @@
     "author": "Amir Jumaniyazov <amir@linkdrop.io>",
     "license": "MIT",
     "scripts": {
-        "compile-contracts": "cd packages/contracts && npx waffle",
+        "compile": "cd packages/contracts && npx waffle",
         "test": "cd packages/contracts && mocha --require @babel/polyfill --require @babel/register",
         "server": "cd packages/relayer && yarn start"
     },
