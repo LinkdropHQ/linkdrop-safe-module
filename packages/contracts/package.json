@@ -1,0 +1,46 @@
+{
+    "name": "@linkdrop-safe-module/contracts",
+    "version": "1.0.0",
+    "description": "Smart contracts for Linkdrop Safe Module",
+    "main": "index.js",
+    "author": "Amir Jumaniyazov <amir@linkdrop.io>",
+    "license": "MIT",
+    "scripts": {
+        "compile": "npx waffle",
+        "test": "mocha --require @babel/polyfill --require @babel/register"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LinkdropProtocol/linkdrop-safe-module.git"
+    },
+    "bugs": {
+        "url": "https://github.com/LinkdropProtocol/linkdrop-safe-module/issues"
+    },
+    "keywords": [
+        "ethereum",
+        "linkdrop",
+        "gnosis",
+        "safe",
+        "wallet"
+    ],
+    "dependencies": {
+        "@gnosis.pm/safe-contracts": "^1.0.0",
+        "ethereum-waffle": "^2.0.12",
+        "ethers": "^4.0.30",
+        "openzeppelin-solidity": "^2.3.0",
+        "solc": "^0.5.9"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.4.4",
+        "@babel/core": "^7.4.5",
+        "@babel/node": "^7.4.5",
+        "@babel/polyfill": "^7.4.4",
+        "@babel/preset-env": "^7.4.5",
+        "@babel/register": "^7.4.4",
+        "chai": "^4.2.0",
+        "truffle": "4.1.15"
+    },
+    "standard": {
+        "parser": "babel-eslint"
+    }
+}
