@@ -29,7 +29,7 @@ export const claim = async (req, res) => {
     expirationTime,
     linkId,
     senderAddress,
-    senderSignature,
+    linkdropSignerSignature,
     receiverAddress,
     receiverSignature
   } = req.body
@@ -52,8 +52,8 @@ export const claim = async (req, res) => {
   if (senderAddress == null || senderAddress === '') {
     throw new Error('senderAddress param is required')
   }
-  if (senderSignature == null || senderSignature === '') {
-    throw new Error('senderSignature param is required')
+  if (linkdropSignerSignature == null || linkdropSignerSignature === '') {
+    throw new Error('linkdropSignerSignature param is required')
   }
   if (receiverAddress == null || receiverAddress === '') {
     throw new Error('receiverAddress param is required')
@@ -100,7 +100,7 @@ export const claim = async (req, res) => {
       expirationTime,
       linkId,
       senderAddress,
-      senderSignature,
+      linkdropSignerSignature,
       receiverAddress,
       receiverSignature
     })
@@ -173,7 +173,7 @@ export const claimERC721 = async (req, res) => {
     expirationTime,
     linkId,
     senderAddress,
-    senderSignature,
+    linkdropSignerSignature,
     receiverAddress,
     receiverSignature
   } = req.body
@@ -196,8 +196,8 @@ export const claimERC721 = async (req, res) => {
   if (senderAddress == null || senderAddress === '') {
     throw new Error('senderAddress param is required')
   }
-  if (senderSignature == null || senderSignature === '') {
-    throw new Error('senderSignature param is required')
+  if (linkdropSignerSignature == null || linkdropSignerSignature === '') {
+    throw new Error('linkdropSignerSignature param is required')
   }
   if (receiverAddress == null || receiverAddress === '') {
     throw new Error('receiverAddress param is required')
@@ -244,7 +244,7 @@ export const claimERC721 = async (req, res) => {
       expirationTime,
       linkId,
       senderAddress,
-      senderSignature,
+      linkdropSignerSignature,
       receiverAddress,
       receiverSignature
     })
