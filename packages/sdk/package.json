@@ -1,0 +1,8 @@
+{
+  "name": "@linkdrop-safe-module/sdk",
+  "version": "1.0.0",
+  "description": "SDK for Linkdrop Safe Module",
+  "main": "index.js",
+  "author": "Amir Jumaniyazov - <amir@linkdrop.io>",
+  "license": "MIT"
+}
