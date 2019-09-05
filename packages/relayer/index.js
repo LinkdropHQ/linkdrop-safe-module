@@ -27,7 +27,7 @@ mongoose
   )
   .then(() => {
     // Run server
-    const PORT = process.env.PORT || 5000
+    const PORT = process.env.PORT || 5050
 
     app.listen(PORT, () => {
       logger.info(`Server is up on port ${PORT}`)

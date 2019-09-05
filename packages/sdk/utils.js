@@ -63,7 +63,7 @@ const signLink = async function ({
     [weiAmount, tokenAddress, tokenAmount, expirationTime, linkId]
   )
   let messageHashToSign = ethers.utils.arrayify(messageHash)
-  return linkdropSigner.signMessage(messageHashToSign)
+  return signingKeyOrWallet.signMessage(messageHashToSign)
 }
 
 /**
