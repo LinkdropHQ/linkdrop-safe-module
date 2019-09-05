@@ -1,5 +1,6 @@
 import { generateLink, generateLinkERC721 } from './generateLink'
 import { claim, claimERC721 } from './claim'
+import { ethers } from 'ethers'
 
 class SDK {
   constructor ({

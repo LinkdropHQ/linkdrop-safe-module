@@ -129,7 +129,7 @@ const signLinkERC721 = async function ({
     [weiAmount, nftAddress, tokenId, expirationTime, linkId]
   )
   let messageHashToSign = ethers.utils.arrayify(messageHash)
-  return linkdropSigner.signMessage(messageHashToSign)
+  return signingKeyOrWallet.signMessage(messageHashToSign)
 }
 
 /**

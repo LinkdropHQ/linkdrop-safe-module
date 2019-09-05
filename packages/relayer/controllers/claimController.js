@@ -81,7 +81,7 @@ export const claim = async (req, res) => {
 
   if (oldClaimTx && oldClaimTx.txHash) {
     logger.info('Submitted claim transaction')
-    logger.info('txHash:', oldClaimTx.txHash)
+    logger.info(`txHash: ${oldClaimTx.txHash}`)
 
     return res.json({
       success: true,
@@ -116,6 +116,7 @@ export const claim = async (req, res) => {
       receiverAddress,
       receiverSignature
     )
+    logger.debug('Link params check passed succesfully...')
 
     logger.debug('Claiming...')
     // Claim
@@ -148,7 +149,7 @@ export const claim = async (req, res) => {
     const document = await claimTx.save()
 
     logger.info('Submitted claim transaction')
-    logger.info('txHash:', txHash)
+    logger.info(`txHash: ${txHash}`)
 
     res.json({
       success: true,
@@ -225,7 +226,7 @@ export const claimERC721 = async (req, res) => {
 
   if (oldClaimTx && oldClaimTx.txHash) {
     logger.info('Submitted claim transaction')
-    logger.info('txHash:', oldClaimTx.txHash)
+    logger.info(`txHash: ${oldClaimTx.txHash}`)
 
     return res.json({
       success: true,
@@ -260,6 +261,7 @@ export const claimERC721 = async (req, res) => {
       receiverAddress,
       receiverSignature
     )
+    logger.debug('Link params check passed succesfully...')
 
     logger.debug('Claiming...')
     // Claim
@@ -292,7 +294,7 @@ export const claimERC721 = async (req, res) => {
     const document = await claimTx.save()
 
     logger.info('Submitted claim transaction')
-    logger.info('txHash:', txHash)
+    logger.info(`txHash: ${txHash}`)
 
     res.json({
       success: true,
