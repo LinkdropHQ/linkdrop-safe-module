@@ -36,6 +36,7 @@ contract LinkdropERC20 is LinkdropCommon {
             (
                 abi.encodePacked
                 (
+                    address(this),
                     _weiAmount,
                     _tokenAddress,
                     _tokenAmount,

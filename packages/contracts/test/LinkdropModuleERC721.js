@@ -145,6 +145,7 @@ describe('Linkdrop Module Tests', () => {
       expiration = 12345678910
 
       link = await createLink(
+        linkdropModule.address,
         linkdropSigner,
         weiAmount,
         nftAddress,
@@ -270,6 +271,7 @@ describe('Linkdrop Module Tests', () => {
       const expiredTimestamp = 0
 
       link = await createLink(
+        linkdropModule.address,
         linkdropSigner,
         weiAmount,
         nftAddress,
@@ -301,6 +303,7 @@ describe('Linkdrop Module Tests', () => {
       tokenId = 2
 
       link = await createLink(
+        linkdropModule.address,
         linkdropSigner,
         weiAmount,
         nftAddress,
@@ -332,6 +335,7 @@ describe('Linkdrop Module Tests', () => {
 
     it('should fail to claim link with fake receiver signature', async () => {
       let fakeLink = await createLink(
+        linkdropModule.address,
         linkdropSigner,
         weiAmount,
         nftAddress,
@@ -361,6 +365,7 @@ describe('Linkdrop Module Tests', () => {
 
     it('should mark link as canceled from owner account', async () => {
       link = await createLink(
+        linkdropModule.address,
         linkdropSigner,
         weiAmount,
         nftAddress,

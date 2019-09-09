@@ -36,6 +36,7 @@ contract LinkdropERC721 is LinkdropCommon {
             (
                 abi.encodePacked
                 (
+                    address(this),
                     _weiAmount,
                     _nftAddress,
                     _tokenId,

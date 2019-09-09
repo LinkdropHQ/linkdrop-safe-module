@@ -62,6 +62,7 @@ export const getParamFromTxEvent = async (
  * @return {String} signature
  */
 const signLink = async function (
+  moduleAddress,
   linkdropSigner, // Wallet
   weiAmount,
   tokenAddress,
@@ -70,8 +71,8 @@ const signLink = async function (
   linkId
 ) {
   let messageHash = ethers.utils.solidityKeccak256(
-    ['uint', 'address', 'uint', 'uint', 'address'],
-    [weiAmount, tokenAddress, tokenAmount, expiration, linkId]
+    ['address', 'uint', 'address', 'uint', 'uint', 'address'],
+    [moduleAddress, weiAmount, tokenAddress, tokenAmount, expiration, linkId]
   )
   let messageHashToSign = ethers.utils.arrayify(messageHash)
   let signature = await linkdropSigner.signMessage(messageHashToSign)
@@ -88,6 +89,7 @@ const signLink = async function (
  * @return {Object} `{linkKey, linkId, linkdropSignerSignature}`
  */
 export const createLink = async function (
+  moduleAddress,
   linkdropSigner, // Wallet
   weiAmount,
   tokenAddress,
@@ -99,6 +101,7 @@ export const createLink = async function (
   let linkId = linkWallet.address
 
   let linkdropSignerSignature = await signLink(
+    moduleAddress,
     linkdropSigner,
     weiAmount,
     tokenAddress,
