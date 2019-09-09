@@ -11,7 +11,7 @@ const axios = require('axios')
  * @param {Number} tokenAmount Amount of tokens
  * @param {Number} expirationTime Link expiration timestamp
  * @param {String} linkKey Ephemeral key attached to link
- * @param {String} senderAddress Sender module address
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {String} linkdropSignerSignature Linkdrop signer signature
  * @param {String} receiverAddress Receiver address
  */
@@ -22,7 +22,7 @@ export const claim = async ({
   tokenAmount,
   expirationTime,
   linkKey,
-  senderAddress,
+  linkdropModuleAddress,
   linkdropSignerSignature,
   receiverAddress
 }) => {
@@ -44,8 +44,8 @@ export const claim = async ({
   if (linkKey == null || linkKey === '') {
     throw new Error('linkKey param is required')
   }
-  if (senderAddress == null || senderAddress === '') {
-    throw new Error('senderAddress param is required')
+  if (linkdropModuleAddress == null || linkdropModuleAddress === '') {
+    throw new Error('linkdropModuleAddress param is required')
   }
   if (linkdropSignerSignature == null || linkdropSignerSignature === '') {
     throw new Error('linkdropSignerSignature param is required')
@@ -63,7 +63,7 @@ export const claim = async ({
     tokenAmount,
     expirationTime,
     linkId,
-    senderAddress,
+    linkdropModuleAddress,
     linkdropSignerSignature,
     receiverAddress,
     receiverSignature
@@ -83,7 +83,7 @@ export const claim = async ({
  * @param {Number} tokenId Token id
  * @param {Number} expirationTime Link expiration timestamp
  * @param {String} linkKey Ephemeral key attached to link
- * @param {String} senderAddress Sender module address
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {String} linkdropSignerSignature Linkdrop signer signature
  * @param {String} receiverAddress Receiver address
  */
@@ -94,7 +94,7 @@ export const claimERC721 = async ({
   tokenId,
   expirationTime,
   linkKey,
-  senderAddress,
+  linkdropModuleAddress,
   linkdropSignerSignature,
   receiverAddress
 }) => {
@@ -116,8 +116,8 @@ export const claimERC721 = async ({
   if (linkKey == null || linkKey === '') {
     throw new Error('linkKey param is required')
   }
-  if (senderAddress == null || senderAddress === '') {
-    throw new Error('senderAddress param is required')
+  if (linkdropModuleAddress == null || linkdropModuleAddress === '') {
+    throw new Error('linkdropModuleAddress param is required')
   }
   if (linkdropSignerSignature == null || linkdropSignerSignature === '') {
     throw new Error('linkdropSignerSignature param is required')
@@ -135,7 +135,7 @@ export const claimERC721 = async ({
     tokenId,
     expirationTime,
     linkId,
-    senderAddress,
+    linkdropModuleAddress,
     linkdropSignerSignature,
     receiverAddress,
     receiverSignature

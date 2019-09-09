@@ -19,6 +19,7 @@ class SDK {
 
   async generateLink ({
     signingKeyOrWallet,
+    linkdropModuleAddress,
     weiAmount,
     tokenAddress,
     tokenAmount,
@@ -26,6 +27,7 @@ class SDK {
   }) {
     return generateLink({
       claimHost: this.claimHost,
+      linkdropModuleAddress,
       signingKeyOrWallet,
       weiAmount,
       tokenAddress,
@@ -36,6 +38,7 @@ class SDK {
 
   async generateLinkERC721 ({
     signingKeyOrWallet,
+    linkdropModuleAddress,
     weiAmount,
     nftAddress,
     tokenId,
@@ -44,6 +47,7 @@ class SDK {
     return generateLinkERC721({
       claimHost: this.claimHost,
       signingKeyOrWallet,
+      linkdropModuleAddress,
       weiAmount,
       nftAddress,
       tokenId,
@@ -57,7 +61,7 @@ class SDK {
     tokenAmount,
     expirationTime,
     linkKey,
-    senderAddress,
+    linkdropModuleAddress,
     linkdropSignerSignature,
     receiverAddress
   }) {
@@ -68,7 +72,7 @@ class SDK {
       tokenAmount,
       expirationTime,
       linkKey,
-      senderAddress,
+      linkdropModuleAddress,
       linkdropSignerSignature,
       receiverAddress
     })
@@ -80,7 +84,7 @@ class SDK {
     tokenId,
     expirationTime,
     linkKey,
-    senderAddress,
+    linkdropModuleAddress,
     linkdropSignerSignature,
     receiverAddress
   }) {
@@ -91,7 +95,7 @@ class SDK {
       tokenId,
       expirationTime,
       linkKey,
-      senderAddress,
+      linkdropModuleAddress,
       linkdropSignerSignature,
       receiverAddress
     })

@@ -7,7 +7,7 @@ const claimTxSchema = new mongoose.Schema({
   expirationTime: { type: Number, required: true },
   linkId: { type: String, required: true, unique: true },
   receiverAddress: { type: String, required: true },
-  senderAddress: { type: String, required: true },
+  linkdropModuleAddress: { type: String, required: true },
   txHash: { type: String, required: true, unique: true }
 })
 

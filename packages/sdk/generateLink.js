@@ -5,6 +5,7 @@ const ethers = require('ethers')
  * @description Function to generate link for ETH and/or ERC20
  * @param {String} claimHost Claim page host
  * @param {String | Object} signingKeyOrWallet Signing key or wallet instances
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {String} weiAmount Wei amount
  * @param {String} tokenAddress Token address
  * @param {Number} tokenAmount Amount of tokens
@@ -13,6 +14,7 @@ const ethers = require('ethers')
 export const generateLink = async ({
   claimHost,
   signingKeyOrWallet,
+  linkdropModuleAddress,
   weiAmount,
   tokenAddress,
   tokenAmount,
@@ -23,6 +25,9 @@ export const generateLink = async ({
   }
   if (signingKeyOrWallet == null || signingKeyOrWallet === '') {
     throw new Error('signingKeyOrWallet param is required')
+  }
+  if (linkdropModuleAddress == null || linkdropModuleAddress === '') {
+    throw new Error('linkdropModuleAddress param is required')
   }
   if (weiAmount == null || weiAmount === '') {
     throw new Error('weiAmount param is required')
@@ -39,6 +44,7 @@ export const generateLink = async ({
 
   const { linkKey, linkId, linkdropSignerSignature } = await createLink({
     signingKeyOrWallet,
+    linkdropModuleAddress,
     weiAmount,
     tokenAddress,
     tokenAmount,
@@ -46,7 +52,7 @@ export const generateLink = async ({
   })
 
   // Construct url
-  const url = `${claimHost}/#/claim?weiAmount=${weiAmount}&tokenAddress=${tokenAddress}&tokenAmount=${tokenAmount}&expirationTime=${expirationTime}&linkKey=${linkKey}&linkdropSignerSignature=${linkdropSignerSignature}`
+  const url = `${claimHost}/#/claim?linkdropModuleAddress=${linkdropModuleAddress}&weiAmount=${weiAmount}&tokenAddress=${tokenAddress}&tokenAmount=${tokenAmount}&expirationTime=${expirationTime}&linkKey=${linkKey}&linkdropSignerSignature=${linkdropSignerSignature}`
 
   return { url, linkId, linkKey, linkdropSignerSignature }
 }
@@ -55,6 +61,7 @@ export const generateLink = async ({
  * @description Function to generate link for ETH and/or ERC20
  * @param {String} claimHost Claim page host
  * @param {String | Object} signingKeyOrWallet Signing key or wallet instances
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {String} weiAmount Wei amount
  * @param {String} nftAddress NFT address
  * @param {Number} tokenId Token id
@@ -63,6 +70,7 @@ export const generateLink = async ({
 export const generateLinkERC721 = async ({
   claimHost,
   signingKeyOrWallet,
+  linkdropModuleAddress,
   weiAmount,
   nftAddress,
   tokenId,
@@ -73,6 +81,9 @@ export const generateLinkERC721 = async ({
   }
   if (signingKeyOrWallet == null || signingKeyOrWallet === '') {
     throw new Error('signingKeyOrWallet param is required')
+  }
+  if (linkdropModuleAddress == null || linkdropModuleAddress === '') {
+    throw new Error('linkdropModuleAddress param is required')
   }
   if (weiAmount == null || weiAmount === '') {
     throw new Error('weiAmount param is required')
@@ -89,6 +100,7 @@ export const generateLinkERC721 = async ({
 
   const { linkKey, linkId, linkdropSignerSignature } = await createLink({
     signingKeyOrWallet,
+    linkdropModuleAddress,
     weiAmount,
     tokenAddress,
     tokenAmount,
@@ -96,7 +108,7 @@ export const generateLinkERC721 = async ({
   })
 
   // Construct url
-  const url = `${claimHost}/#/claim?weiAmount=${weiAmount}&nftAddress=${nftAddress}&tokenId=${tokenId}&expirationTime=${expirationTime}&linkKey=${linkKey}&linkdropSignerSignature=${linkdropSignerSignature}`
+  const url = `${claimHost}/#/claim?linkdropModuleAddress=${linkdropModuleAddress}&weiAmount=${weiAmount}&nftAddress=${nftAddress}&tokenId=${tokenId}&expirationTime=${expirationTime}&linkKey=${linkKey}&linkdropSignerSignature=${linkdropSignerSignature}`
 
   return { url, linkId, linkKey, linkdropSignerSignature }
 }

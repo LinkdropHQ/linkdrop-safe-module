@@ -28,7 +28,7 @@ export const claim = async (req, res) => {
     tokenAmount,
     expirationTime,
     linkId,
-    senderAddress,
+    linkdropModuleAddress,
     linkdropSignerSignature,
     receiverAddress,
     receiverSignature
@@ -49,8 +49,8 @@ export const claim = async (req, res) => {
   if (linkId == null || linkId === '') {
     throw new Error('linkId param is required')
   }
-  if (senderAddress == null || senderAddress === '') {
-    throw new Error('senderAddress param is required')
+  if (linkdropModuleAddress == null || linkdropModuleAddress === '') {
+    throw new Error('linkdropModuleAddress param is required')
   }
   if (linkdropSignerSignature == null || linkdropSignerSignature === '') {
     throw new Error('linkdropSignerSignature param is required')
@@ -63,7 +63,7 @@ export const claim = async (req, res) => {
   }
 
   const linkdropModule = new ethers.Contract(
-    senderAddress,
+    linkdropModuleAddress,
     LinkdropModule.abi,
     relayer
   )
@@ -75,7 +75,7 @@ export const claim = async (req, res) => {
     tokenAmount,
     expirationTime,
     linkId,
-    senderAddress,
+    linkdropModuleAddress,
     receiverAddress
   })
 
@@ -99,7 +99,7 @@ export const claim = async (req, res) => {
       tokenAmount,
       expirationTime,
       linkId,
-      senderAddress,
+      linkdropModuleAddress,
       linkdropSignerSignature,
       receiverAddress,
       receiverSignature
@@ -141,7 +141,7 @@ export const claim = async (req, res) => {
       tokenAmount,
       expirationTime,
       linkId,
-      senderAddress,
+      linkdropModuleAddress,
       receiverAddress,
       txHash
     })
@@ -173,7 +173,7 @@ export const claimERC721 = async (req, res) => {
     tokenId,
     expirationTime,
     linkId,
-    senderAddress,
+    linkdropModuleAddress,
     linkdropSignerSignature,
     receiverAddress,
     receiverSignature
@@ -194,8 +194,8 @@ export const claimERC721 = async (req, res) => {
   if (linkId == null || linkId === '') {
     throw new Error('linkId param is required')
   }
-  if (senderAddress == null || senderAddress === '') {
-    throw new Error('senderAddress param is required')
+  if (linkdropModuleAddress == null || linkdropModuleAddress === '') {
+    throw new Error('linkdropModuleAddress param is required')
   }
   if (linkdropSignerSignature == null || linkdropSignerSignature === '') {
     throw new Error('linkdropSignerSignature param is required')
@@ -208,7 +208,7 @@ export const claimERC721 = async (req, res) => {
   }
 
   const linkdropModule = new ethers.Contract(
-    senderAddress,
+    linkdropModuleAddress,
     LinkdropModule.abi,
     relayer
   )
@@ -220,7 +220,7 @@ export const claimERC721 = async (req, res) => {
     tokenId,
     expirationTime,
     linkId,
-    senderAddress,
+    linkdropModuleAddress,
     receiverAddress
   })
 
@@ -244,7 +244,7 @@ export const claimERC721 = async (req, res) => {
       tokenId,
       expirationTime,
       linkId,
-      senderAddress,
+      linkdropModuleAddress,
       linkdropSignerSignature,
       receiverAddress,
       receiverSignature
@@ -286,7 +286,7 @@ export const claimERC721 = async (req, res) => {
       tokenId,
       expirationTime,
       linkId,
-      senderAddress,
+      linkdropModuleAddress,
       receiverAddress,
       txHash
     })

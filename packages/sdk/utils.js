@@ -3,6 +3,7 @@ const ethers = require('ethers')
 /**
  * @description Function to create link for ETH and/or ERC20
  * @param {String | Object} signingKeyOrWallet Signing key or wallet instance
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {String} weiAmount Wei amount
  * @param {String} tokenAddress Token address
  * @param {Number} tokenAmount Amount of tokens
@@ -11,6 +12,7 @@ const ethers = require('ethers')
  */
 export const createLink = async ({
   signingKeyOrWallet,
+  linkdropModuleAddress,
   weiAmount,
   tokenAddress,
   tokenAmount,
@@ -22,6 +24,7 @@ export const createLink = async ({
 
   let linkdropSignerSignature = await signLink({
     signingKeyOrWallet,
+    linkdropModuleAddress,
     weiAmount,
     tokenAddress,
     tokenAmount,
@@ -39,6 +42,7 @@ export const createLink = async ({
 /**
  * @description Function to sign link
  * @param {String | Object} signingKeyOrWallet Signing key or wallet instance
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {Number} weiAmount Amount of wei
  * @param {String} tokenAddress Address of token contract
  * @param {Number} tokenAmount Amount of tokens
@@ -48,6 +52,7 @@ export const createLink = async ({
  */
 const signLink = async function ({
   signingKeyOrWallet,
+  linkdropModuleAddress,
   weiAmount,
   tokenAddress,
   tokenAmount,
@@ -59,8 +64,15 @@ const signLink = async function ({
   }
 
   let messageHash = ethers.utils.solidityKeccak256(
-    ['uint', 'address', 'uint', 'uint', 'address'],
-    [weiAmount, tokenAddress, tokenAmount, expirationTime, linkId]
+    ['address', 'uint', 'address', 'uint', 'uint', 'address'],
+    [
+      linkdropModuleAddress,
+      weiAmount,
+      tokenAddress,
+      tokenAmount,
+      expirationTime,
+      linkId
+    ]
   )
   let messageHashToSign = ethers.utils.arrayify(messageHash)
   return signingKeyOrWallet.signMessage(messageHashToSign)
@@ -69,6 +81,7 @@ const signLink = async function ({
 /**
  * @description Function to create link for ETH and/or ERC721
  * @param {String | Object} signingKeyOrWallet Signing key or wallet instance
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {String} weiAmount Wei amount
  * @param {String} nftAddress NFT address
  * @param {Number} tokenId Token id
@@ -77,6 +90,7 @@ const signLink = async function ({
  */
 export const createLinkERC721 = async ({
   signingKeyOrWallet,
+  linkdropModuleAddress,
   weiAmount,
   nftAddress,
   tokenId,
@@ -88,6 +102,7 @@ export const createLinkERC721 = async ({
 
   let linkdropSignerSignature = await signLinkERC721({
     signingKeyOrWallet,
+    linkdropModuleAddress,
     weiAmount,
     nftAddress,
     tokenId,
@@ -105,6 +120,7 @@ export const createLinkERC721 = async ({
 /**
  * @description Function to sign link for ERC721
  * @param {String | Object} signingKeyOrWallet Signing key or wallet instance
+ * @param {String} linkdropModuleAddress Address of linkdrop module
  * @param {Number} weiAmount Amount of wei
  * @param {String} nftAddresss Address of NFT
  * @param {Number} tokenId Token id
@@ -114,6 +130,7 @@ export const createLinkERC721 = async ({
  */
 const signLinkERC721 = async function ({
   signingKeyOrWallet,
+  linkdropModuleAddress,
   weiAmount,
   nftAddress,
   tokenId,
@@ -125,8 +142,15 @@ const signLinkERC721 = async function ({
   }
 
   let messageHash = ethers.utils.solidityKeccak256(
-    ['uint', 'address', 'uint', 'uint', 'address'],
-    [weiAmount, nftAddress, tokenId, expirationTime, linkId]
+    ['address', 'uint', 'address', 'uint', 'uint', 'address'],
+    [
+      linkdropModuleAddress,
+      weiAmount,
+      nftAddress,
+      tokenId,
+      expirationTime,
+      linkId
+    ]
   )
   let messageHashToSign = ethers.utils.arrayify(messageHash)
   return signingKeyOrWallet.signMessage(messageHashToSign)
