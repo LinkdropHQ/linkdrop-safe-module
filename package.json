@@ -1,5 +1,5 @@
 {
-    "name": "linkdrop-safe-module",
+    "name": "root",
     "version": "1.0.0",
     "description": "Monorepo for Linkdrop Safe Module",
     "main": "index.js",
@@ -8,7 +8,9 @@
     "scripts": {
         "compile": "cd packages/contracts && npx waffle",
         "test": "cd packages/contracts && mocha --require @babel/polyfill --require @babel/register",
-        "server": "cd packages/relayer && yarn start"
+        "server": "cd packages/relayer && yarn start",
+        "deploy-module": "npx babel-node packages/scripts/deployModule",
+        "generate-and-claim-link": "npx babel-node packages/scripts/generateAndClaimLink"
     },
     "repository": {
         "type": "git",
@@ -26,7 +28,12 @@
     ],
     "devDependencies": {
         "lerna": "^3.16.4",
-        "@babel/preset-env": "^7.4.5"
+        "@babel/cli": "^7.4.3",
+        "@babel/core": "^7.4.3",
+        "@babel/node": "^7.2.2",
+        "@babel/polyfill": "^7.4.3",
+        "@babel/preset-env": "^7.4.3",
+        "@babel/register": "^7.4.0"
     },
     "standard": {
         "parser": "babel-eslint"
