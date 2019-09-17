@@ -1,6 +1,6 @@
 {
   "name": "@linkdrop-safe-module/relayer",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Relayer service for Linkdrop Safe Module",
   "main": "index.js",
   "author": "Amir Jumaniyazov - <amir@linkdrop.io>",
