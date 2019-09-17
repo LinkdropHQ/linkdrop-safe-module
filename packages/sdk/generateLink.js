@@ -98,12 +98,12 @@ export const generateLinkERC721 = async ({
     throw new Error('expirationTime param is required')
   }
 
-  const { linkKey, linkId, linkdropSignerSignature } = await createLink({
+  const { linkKey, linkId, linkdropSignerSignature } = await createLinkERC721({
     signingKeyOrWallet,
     linkdropModuleAddress,
     weiAmount,
-    tokenAddress,
-    tokenAmount,
+    nftAddress,
+    tokenId,
     expirationTime
   })
 

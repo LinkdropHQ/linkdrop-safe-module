@@ -88,7 +88,7 @@ class SDK {
     linkdropSignerSignature,
     receiverAddress
   }) {
-    return claim({
+    return claimERC721({
       apiHost: this.apiHost,
       weiAmount,
       nftAddress,
