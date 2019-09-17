@@ -6,8 +6,7 @@ import { ethers } from 'ethers'
 
 const main = async () => {
   const sdk = new SDK({ apiHost: 'http://localhost:5050' })
-  const signingKeyOrWallet =
-    'EEDFA6C63D0B44CE6C511C7A9425A8668DFADFC8F47FF24647A92489D5A913CC'
+  const signingKeyOrWallet = ''
 
   const provider = new ethers.providers.JsonRpcProvider(
     'https://rinkeby.infura.io'
