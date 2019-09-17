@@ -1,10 +1,13 @@
 {
-    "name": "@linkdrop-safe-module/contracts",
+    "name": "@linkdrop/safe-module-contracts",
     "version": "1.0.0",
     "description": "Smart contracts for Linkdrop Safe Module",
     "main": "index.js",
     "author": "Amir Jumaniyazov <amir@linkdrop.io>",
     "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "compile": "npx waffle",
         "test": "mocha --require @babel/polyfill --require @babel/register"

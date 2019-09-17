@@ -1,19 +1,20 @@
 import SDK from '../sdk'
 import { ethers } from 'ethers'
 
-// gnosisSafe:  0xdf75BAc567e46EacA47cAeB2feC627D545201069
-// linkdropModule:  0x41753f2e2151baf68b494DED71BFA9233C121ffD
+// gnosisSafe:  0xDC32b6C2117c337ECE17A0943337513c7E2A770d
+// linkdropModule:  0xd2909562be80684A443bcCB84DAF7AA5e50E1a0B
 
 const main = async () => {
   const sdk = new SDK({ apiHost: 'http://localhost:5050' })
-  const signingKeyOrWallet = ''
+  const signingKeyOrWallet =
+    'EEDFA6C63D0B44CE6C511C7A9425A8668DFADFC8F47FF24647A92489D5A913CC'
 
   const provider = new ethers.providers.JsonRpcProvider(
     'https://rinkeby.infura.io'
   )
   const wallet = new ethers.Wallet(signingKeyOrWallet, provider)
 
-  const linkdropModuleAddress = '0x41753f2e2151baf68b494DED71BFA9233C121ffD'
+  const linkdropModuleAddress = '0xd2909562be80684A443bcCB84DAF7AA5e50E1a0B'
   const receiverAddress = '0x9b5FEeE3B220eEdd3f678efa115d9a4D91D5cf0A'
 
   const weiAmount = 100

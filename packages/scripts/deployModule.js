@@ -13,7 +13,7 @@ const ZERO = 0
 const provider = new ethers.providers.JsonRpcProvider(
   'https://rinkeby.infura.io'
 )
-const privateKey = ''
+const privateKey = 'EEDFA6C63D0B44CE6C511C7A9425A8668DFADFC8F47FF24647A92489D5A913CC'
 const deployer = new ethers.Wallet(privateKey, provider)
 
 const proxyFactoryAddress = '0x12302fE9c02ff50939BaAaaf415fc226C078613C' // from https://safe-relay.rinkeby.gnosis.pm/
