@@ -1,13 +1,15 @@
 {
   "name": "@linkdrop-safe-module/scripts",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
   "author": "Amir Jumaniyazov - <amir@linkdrop.io>",
   "dependencies": {
     "ethers": "^4.0.37"
   },
   "babel": {
     "extends": "../../babel.config.js"
-  }
+  },
+  "gitHead": "481cfa2142f3d4ba881cf9d941183b1ebccef139"
 }

@@ -1,6 +1,6 @@
 {
     "name": "@linkdrop/safe-module-contracts",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Smart contracts for Linkdrop Safe Module",
     "main": "index.js",
     "author": "Amir Jumaniyazov <amir@linkdrop.io>",
@@ -45,5 +45,6 @@
     },
     "standard": {
         "parser": "babel-eslint"
-    }
+    },
+    "gitHead": "481cfa2142f3d4ba881cf9d941183b1ebccef139"
 }
