@@ -12,7 +12,7 @@ class SDK {
     chain = 'rinkeby',
     apiHost = 'https://safe.linkdrop.io',
     claimHost = 'https://claim.linkdrop.io',
-    jsonRpcUrl,
+    jsonRpcUrl = `${chain}.infura.io`,
     linkdropModuleMasterCopy = '0x19Ff4Cb4eFD0b9E04433Dde6507ADC68225757f2',
     createAndAddModules = '0x40Ba7DF971BBdE476517B7d6B908113f71583183',
     proxyFactory = '0x12302fE9c02ff50939BaAaaf415fc226C078613C'
@@ -21,7 +21,7 @@ class SDK {
       throw new Error('Unsupported chain')
     }
     this.chain = chain
-    this.jsonRpcUrl = jsonRpcUrl || `${chain}.infura.io`
+    this.jsonRpcUrl = jsonRpcUrl
     this.apiHost = apiHost
     this.claimHost = claimHost
     this.linkdropModuleMasterCopy = linkdropModuleMasterCopy
