@@ -170,3 +170,14 @@ export const signReceiverAddress = async (linkKey, receiverAddress) => {
   let messageHashToSign = ethers.utils.arrayify(messageHash)
   return wallet.signMessage(messageHashToSign)
 }
+
+export const buildCreate2Address = (creatorAddress, saltHex, byteCode) => {
+  const byteCodeHash = ethers.utils.keccak256(byteCode)
+  return `0x${ethers.utils
+    .keccak256(
+      `0x${['ff', creatorAddress, saltHex, byteCodeHash]
+        .map(x => x.replace(/0x/, ''))
+        .join('')}`
+    )
+    .slice(-40)}`.toLowerCase()
+}

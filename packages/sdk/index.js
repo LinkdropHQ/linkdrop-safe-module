@@ -1,13 +1,21 @@
 import { generateLink, generateLinkERC721 } from './generateLink'
 import { claim, claimERC721 } from './claim'
 import { ethers } from 'ethers'
+import {
+  isGnosisSafe,
+  isLinkdropModuleEnabled,
+  enableLinkdropModule
+} from './safeUtils'
 
 class SDK {
   constructor ({
     chain = 'rinkeby',
     apiHost = 'https://safe.linkdrop.io',
     claimHost = 'https://claim.linkdrop.io',
-    jsonRpcUrl
+    jsonRpcUrl,
+    linkdropModuleMasterCopy = '0x19Ff4Cb4eFD0b9E04433Dde6507ADC68225757f2',
+    createAndAddModules = '0x40Ba7DF971BBdE476517B7d6B908113f71583183',
+    proxyFactory = '0x12302fE9c02ff50939BaAaaf415fc226C078613C'
   }) {
     if (chain !== 'rinkeby' && chain !== 'mainnet') {
       throw new Error('Unsupported chain')
@@ -16,6 +24,9 @@ class SDK {
     this.jsonRpcUrl = jsonRpcUrl || `${chain}.infura.io`
     this.apiHost = apiHost
     this.claimHost = claimHost
+    this.linkdropModuleMasterCopy = linkdropModuleMasterCopy
+    this.createAndAddModules = createAndAddModules
+    this.proxyFactory = proxyFactory
   }
 
   async generateLink ({
@@ -100,6 +111,26 @@ class SDK {
       linkdropSignerSignature,
       receiverAddress
     })
+  }
+
+  async enableLinkdropModule ({ safe, privateKey }) {
+    return enableLinkdropModule({
+      safe,
+      privateKey,
+      linkdropModuleMasterCopy: this.linkdropModuleMasterCopy,
+      createAndAddModules: this.createAndAddModules,
+      proxyFactory: this.proxyFactory,
+      apiHost: this.apiHost,
+      jsonRpcUrl: this.jsonRpcUrl
+    })
+  }
+
+  async isGnosisSafe (safe) {
+    return isGnosisSafe({ safe, jsonRpcUrl: this.jsonRpcUrl })
+  }
+
+  async isLinkdropModuleEnabled (safe) {
+    return isLinkdropModuleEnabled({ safe, jsonRpcUrl: this.jsonRpcUrl })
   }
 }
 

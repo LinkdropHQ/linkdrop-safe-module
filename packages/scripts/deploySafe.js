@@ -5,6 +5,7 @@ import GnosisSafe from '../contracts/build/GnosisSafe'
 import LinkdropModule from '../contracts/build/LinkdropModule'
 
 import * as utils from './utils'
+import { AddressZero } from 'ethers/constants'
 
 const ADDRESS_ZERO = ethers.constants.AddressZero
 const ZERO_BYTES = '0x'
@@ -29,38 +30,17 @@ const main = async () => {
     deployer
   )
 
-  const linkdropModuleMasterCopy = new ethers.Contract(
-    linkdropModuleMasterCopyAddress,
-    LinkdropModule.abi,
+  const gnosisSafeMasterCopy = new ethers.Contract(
+    gnosisSafeMasterCopyAddress,
+    GnosisSafe.abi,
     provider
   )
-
-  const moduleData = utils.getData(linkdropModuleMasterCopy, 'setup', [
-    [deployer.address]
-  ])
-  console.log('moduleData: ', moduleData)
-
-  const proxyFactoryData = utils.getData(proxyFactory, 'createProxy', [
-    linkdropModuleMasterCopyAddress,
-    moduleData
-  ])
-  console.log('proxyFactoryData: ', proxyFactoryData)
-
-  const modulesCreationData = utils.createAndAddModulesData([proxyFactoryData])
-  console.log('modulesCreationData: ', modulesCreationData)
-
-  const createAndAddModulesData = utils.getData(
-    createAndAddModules,
-    'createAndAddModules',
-    [proxyFactory.address, modulesCreationData]
-  )
-  console.log('createAndAddModulesData: ', createAndAddModulesData)
 
   const gnosisSafeData = utils.getData(gnosisSafeMasterCopy, 'setup', [
     [deployer.address], // owners
     1, // treshold
-    createAndAddModules.address, // to
-    createAndAddModulesData, // data,
+    ADDRESS_ZERO, // to
+    '0x', // data,
     ADDRESS_ZERO, // payment token address
     ZERO, // payment amount
     ADDRESS_ZERO // payment receiver address
@@ -87,12 +67,6 @@ const main = async () => {
   console.log('gnosisSafe: ', gnosisSafe.address)
 
   const modules = await gnosisSafe.getModules()
-
-  const linkdropModule = new ethers.Contract(
-    modules[0],
-    LinkdropModule.abi,
-    deployer
-  )
-  console.log('linkdropModule: ', linkdropModule.address)
+  console.log('modules: ', modules)
 }
 main()

@@ -6,6 +6,7 @@
   "private": true,
   "author": "Amir Jumaniyazov - <amir@linkdrop.io>",
   "dependencies": {
+    "eth-sig-util": "^2.5.0",
     "ethers": "^4.0.37"
   },
   "babel": {

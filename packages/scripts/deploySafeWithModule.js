@@ -29,6 +29,18 @@ const main = async () => {
     deployer
   )
 
+  const gnosisSafeMasterCopy = new ethers.Contract(
+    gnosisSafeMasterCopyAddress,
+    GnosisSafe.abi,
+    provider
+  )
+
+  const createAndAddModules = new ethers.Contract(
+    createAndAddModulesAddress,
+    CreateAndAddModules.abi,
+    provider
+  )
+
   const linkdropModuleMasterCopy = new ethers.Contract(
     linkdropModuleMasterCopyAddress,
     LinkdropModule.abi,

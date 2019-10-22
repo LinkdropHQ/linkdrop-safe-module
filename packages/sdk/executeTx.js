@@ -31,6 +31,7 @@ export const executeTx = async ({
   data,
   operation,
   gasToken,
+  gasPrice = '0',
   refundReceiver
 }) => {
   assert.url(apiHost, 'Api host is required')
@@ -42,23 +43,12 @@ export const executeTx = async ({
   assert.string(data, 'Data is required')
   assert.string(gasToken, 'Gas token is required')
   assert.string(refundReceiver, 'Refund receiver address is required')
+  const provider = new ethers.providers.JsonRpcProvider(jsonRpcUrl)
+  const gnosisSafe = new ethers.Contract(safe, GnosisSafe.abi, provider)
+  const nonce = await gnosisSafe.nonce()
 
-  const web3 = new Web3(jsonRpcUrl)
-  const gnosisSafe = new web3.eth.Contract(GnosisSafe.abi, safe)
-  const nonce = await gnosisSafe.methods.nonce().call()
-
-  const { baseGas, safeTxGas, gasPrice } = await estimateGasCosts({
-    jsonRpcUrl,
-    safe,
-    to,
-    value,
-    data,
-    operation,
-    gasPrice,
-    gasToken,
-    refundReceiver,
-    signatureCount: 1
-  })
+  const safeTxGas = '0'
+  const baseGas = '0'
 
   const signature = await signTx({
     safe,
@@ -72,31 +62,10 @@ export const executeTx = async ({
     gasPrice,
     gasToken,
     refundReceiver,
-    nonce
+    nonce: nonce.toString()
   })
 
-  // Estimate gas of paying transaction
-  const estimate = await gnosisSafe.methods
-    .execTransaction(
-      to,
-      value,
-      data,
-      operation,
-      safeTxGas,
-      baseGas,
-      gasPrice,
-      gasToken,
-      refundReceiver,
-      signature
-    )
-    .estimateGas({
-      from: new ethers.Wallet(privateKey).address,
-      gasPrice
-    })
-
-  const gasLimit = estimate + safeTxGas.toNumber() + 100000
-
-  const response = await axios.post(`${apiHost}/api/v1/safes/execute`, {
+  const response = await axios.post(`${apiHost}/transactions/execute`, {
     safe,
     to,
     value,
@@ -107,8 +76,7 @@ export const executeTx = async ({
     gasPrice,
     gasToken,
     refundReceiver,
-    signature,
-    gasLimit
+    signature
   })
 
   const { success, txHash, errors } = response.data

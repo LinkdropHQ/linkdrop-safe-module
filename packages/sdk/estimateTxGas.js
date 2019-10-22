@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import GnosisSafe from '@gnosis.pm/safe-contracts/build/contracts/GnosisSafe'
-import { encodeParams } from './utils'
+import { encodeParams } from './safeUtils'
 import BigNumber from 'bignumber.js'
 import Web3 from 'web3'
 
