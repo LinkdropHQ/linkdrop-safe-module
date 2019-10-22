@@ -6,13 +6,14 @@ class SDK {
   constructor ({
     chain = 'rinkeby',
     apiHost = 'https://safe.linkdrop.io',
-    claimHost = 'https://claim.linkdrop.io'
+    claimHost = 'https://claim.linkdrop.io',
+    jsonRpcUrl
   }) {
     if (chain !== 'rinkeby' && chain !== 'mainnet') {
       throw new Error('Unsupported chain')
     }
     this.chain = chain
-    this.jsonRpcUrl = `${chain}.infura.io`
+    this.jsonRpcUrl = jsonRpcUrl || `${chain}.infura.io`
     this.apiHost = apiHost
     this.claimHost = claimHost
   }
