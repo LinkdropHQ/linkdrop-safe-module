@@ -120,7 +120,7 @@ class SDK {
    * @param {String} createAndAddModules Create and add modules library address
    * @param {String} proxyFactory Proxy factory address
    * @param {String} jsonRpcUrl JSON RPC URL
-   * @return {Object} `{data, linkdropModule, createAndAddModules}`
+   * @return {Object} `{data, address}`
    */
   async getEnableLinkdropModuleData (safe) {
     return getEnableLinkdropModuleData({

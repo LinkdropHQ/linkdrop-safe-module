@@ -111,5 +111,8 @@ export const getEnableLinkdropModuleData = async ({
     deployer: safe
   })
 
-  return { data: createAndAddModulesData, linkdropModule, createAndAddModules }
+  return {
+    data: createAndAddModulesData,
+    address: linkdropModule
+  }
 }
