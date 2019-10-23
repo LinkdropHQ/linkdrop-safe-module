@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import { executeTx } from './executeTx'
-import GnosisSafe from '../contracts/build/contracts/GnosisSafe'
+import GnosisSafe from '../contracts/build/GnosisSafe'
 import LinkdropModule from '../contracts/build/LinkdropModule.json'
 import ProxyFactory from '../contracts/build/ProxyFactory.json'
 import CreateAndAddModules from '../contracts/build/CreateAndAddModules.json'

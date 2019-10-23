@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import GnosisSafe from '../contracts/build/contracts/GnosisSafe'
+import GnosisSafe from '../contracts/build/GnosisSafe'
 import { encodeParams } from './safeUtils'
 import BigNumber from 'bignumber.js'
 import Web3 from 'web3'
