@@ -2,23 +2,10 @@ import ClaimTx from '../models/claimTx'
 import ClaimTxERC721 from '../models/claimTxERC721'
 import LinkdropModule from '../../contracts/build/LinkdropModule.json'
 import logger from '../utils/logger'
+import relayerWalletService from '../services/relayerWalletService'
 
 const ethers = require('ethers')
 ethers.errors.setLogLevel('error')
-
-const JSON_RPC_URL = process.env.JSON_RPC_URL
-const RELAYER_PRIVATE_KEY = process.env.RELAYER_PRIVATE_KEY
-
-if (JSON_RPC_URL == null || JSON_RPC_URL === '') {
-  throw new Error('Please provide json rpc url')
-}
-
-if (RELAYER_PRIVATE_KEY == null || RELAYER_PRIVATE_KEY === '') {
-  throw new Error('Please provide relayer private key')
-}
-
-const provider = new ethers.providers.JsonRpcProvider(JSON_RPC_URL)
-const relayer = new ethers.Wallet(RELAYER_PRIVATE_KEY, provider)
 
 export const claim = async (req, res) => {
   //
@@ -65,7 +52,7 @@ export const claim = async (req, res) => {
   const linkdropModule = new ethers.Contract(
     linkdropModuleAddress,
     LinkdropModule.abi,
-    relayer
+    relayerWalletService.wallet
   )
 
   // Check whether a claim tx exists in database
@@ -210,7 +197,7 @@ export const claimERC721 = async (req, res) => {
   const linkdropModule = new ethers.Contract(
     linkdropModuleAddress,
     LinkdropModule.abi,
-    relayer
+    relayerWalletService.wallet
   )
 
   // Check whether a claim tx exists in database

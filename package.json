@@ -6,9 +6,15 @@
     "author": "Amir Jumaniyazov <amir@linkdrop.io>",
     "license": "MIT",
     "private": true,
-    "workspaces": [
-        "packages/*"
-    ],
+    "workspaces": {
+        "packages": [
+            "packages/*"
+        ],
+        "nohoist": [
+            "**/truffle",
+            "**/truffle/**"
+        ]
+    },
     "scripts": {
         "compile": "cd packages/contracts && npx waffle",
         "test": "cd packages/contracts && mocha --require @babel/polyfill --require @babel/register",
