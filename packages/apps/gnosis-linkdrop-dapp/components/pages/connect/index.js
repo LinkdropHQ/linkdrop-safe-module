@@ -2,7 +2,7 @@ import React from 'react'
 import { Page } from 'components/pages'
 import { translate } from 'decorators'
 import styles from './styles.module'
-import { Button } from 'components/common'
+import WalletConnect from './wallet-connect'
 
 @translate('pages.connect')
 class Connect extends React.Component {
@@ -12,7 +12,7 @@ class Connect extends React.Component {
         className={styles.title}
         dangerouslySetInnerHTML={{ __html: this.t('titles.connectToGnosisSafe') }}
       />
-      <Button>{this.t('buttons.continue')}</Button>
+      <WalletConnect />
     </Page>
   }
 }

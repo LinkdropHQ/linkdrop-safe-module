@@ -8,6 +8,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const claimController = require('./controllers/claimController')
+const transactionsController = require('./controllers/transactionsController')
 
 const mongoURI = process.env.MONGODB_URI
 
@@ -43,6 +44,10 @@ mongoose
 app.get('/', (req, res) => res.send(`Linkdrop Safe Module Relayer`))
 app.post('/linkdrops/claim', asyncHandler(claimController.claim))
 app.post('/linkdrops/claim-erc721', asyncHandler(claimController.claimERC721))
+app.post(
+  '/transactions/execute',
+  asyncHandler(transactionsController.executeTx)
+)
 
 // Error handling
 app.use((err, req, res, next) => {
