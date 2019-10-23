@@ -65,34 +65,34 @@ export const isLinkdropModuleEnabled = async ({ jsonRpcUrl, safe }) => {
 }
 
 /**
- * Function to enable linkdrop module for existing safe
+ * Function to get data to enable linkdrop module for existing safe
  * @param {String} safe Existing safe address
  * @param {String} linkdropModuleMasterCopy Linkdrop module master copy address
  * @param {String} createAndAddModules Create and add modules library address
  * @param {String} proxyFactory Proxy factory address
- * @param {String} privateKey Private key of `safe` owner
- * @param {String} apiHost API base url
  * @param {String} jsonRpcUrl JSON RPC URL
  */
-export const enableLinkdropModule = async ({
+export const getEnableLinkdropModuleData = async ({
   safe,
   linkdropModuleMasterCopy,
   createAndAddModules,
   proxyFactory,
-  privateKey,
-  apiHost,
   jsonRpcUrl
 }) => {
-  const safeOwner = new ethers.Wallet(privateKey)
+  const provider = new ethers.providers.JsonRpcProvider(jsonRpcUrl)
+
+  const safeWallet = new ethers.Contract(safe, GnosisSafe.abi, provider)
+
+  const owners = await safeWallet.getOwners()
 
   const linkdropModuleSetupData = encodeParams(LinkdropModule.abi, 'setup', [
-    [safeOwner.address]
+    owners
   ])
 
   const linkdropModuleCreationData = encodeParams(
     ProxyFactory.abi,
     'createProxyWithNonce',
-    [linkdropModuleMasterCopy, linkdropModuleSetupData, safeOwner.address]
+    [linkdropModuleMasterCopy, linkdropModuleSetupData, owners[0].address]
   )
 
   const modulesCreationData = encodeDataForCreateAndAddModules([
@@ -106,23 +106,10 @@ export const enableLinkdropModule = async ({
   )
 
   const linkdropModule = computeLinkdropModuleAddress({
-    owner: safeOwner.address,
+    owners,
     linkdropModuleMasterCopy,
     deployer: safe
   })
 
-  const { success, txHash, errors } = await executeTx({
-    apiHost,
-    jsonRpcUrl,
-    safe,
-    privateKey,
-    to: createAndAddModules,
-    value: '0',
-    data: createAndAddModulesData,
-    operation: '1', // delegatecall
-    gasToken: AddressZero,
-    refundReceiver: AddressZero
-  })
-
-  return { success, linkdropModule, txHash, errors }
+  return { data: createAndAddModulesData, linkdropModule, createAndAddModules }
 }

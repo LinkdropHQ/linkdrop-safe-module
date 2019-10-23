@@ -4,7 +4,7 @@ import { ethers } from 'ethers'
 import {
   isGnosisSafe,
   isLinkdropModuleEnabled,
-  enableLinkdropModule
+  getEnableLinkdropModuleData
 } from './safeUtils'
 
 class SDK {
@@ -113,14 +113,21 @@ class SDK {
     })
   }
 
-  async enableLinkdropModule ({ safe, privateKey }) {
-    return enableLinkdropModule({
+  /**
+   * Function to get data to enable linkdrop module for existing safe
+   * @param {String} safe Existing safe address
+   * @param {String} linkdropModuleMasterCopy Linkdrop module master copy address
+   * @param {String} createAndAddModules Create and add modules library address
+   * @param {String} proxyFactory Proxy factory address
+   * @param {String} jsonRpcUrl JSON RPC URL
+   * @return {Object} `{data, linkdropModule, createAndAddModules}`
+   */
+  async getEnableLinkdropModuleData (safe) {
+    return getEnableLinkdropModuleData({
       safe,
-      privateKey,
       linkdropModuleMasterCopy: this.linkdropModuleMasterCopy,
       createAndAddModules: this.createAndAddModules,
       proxyFactory: this.proxyFactory,
-      apiHost: this.apiHost,
       jsonRpcUrl: this.jsonRpcUrl
     })
   }
