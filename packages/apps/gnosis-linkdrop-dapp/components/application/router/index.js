@@ -1,7 +1,7 @@
 import React from 'react'
 import i18next from 'i18next'
 import { Route, Switch } from 'react-router-dom'
-import { Main, NotFound } from 'components/pages'
+import { Connect, NotFound, Claiming, LinkGenerated, Activate, CreateLink } from 'components/pages'
 import './styles'
 
 import { actions } from 'decorators'
@@ -29,7 +29,11 @@ class AppRouter extends React.Component {
 
   render () {
     return <Switch>
-      <Route path='/' component={Main} />
+      <Route path='/activate' component={Activate} />
+      <Route path='/create-link' component={CreateLink} />
+      <Route path='/link-generated' component={LinkGenerated} />
+      <Route path='/receive' component={Claiming} />
+      <Route path='/' component={Connect} />
       <Route path='*' component={NotFound} />
     </Switch>
   }

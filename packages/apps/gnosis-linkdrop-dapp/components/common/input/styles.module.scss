@@ -1,0 +1,17 @@
+@import "variables";
+
+.container {
+  max-width: 300px;
+  min-width: 300px;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  color: $greyColor;
+  border-color: $greyColor;
+
+  &::placeholder {
+    color: $greyColor;
+  }
+}

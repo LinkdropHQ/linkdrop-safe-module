@@ -1,0 +1,27 @@
+@import "variables";
+
+.title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.input {
+  margin-bottom: 20px;
+}
+
+.button {
+  margin-bottom: 40px;
+}
+
+.note {
+  text-align: center;
+  color: $greyColor;
+  font-size: 18px;
+}

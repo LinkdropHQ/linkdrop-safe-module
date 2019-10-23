@@ -5,8 +5,9 @@ import { translate } from 'decorators'
 @translate('pages.page')
 class Header extends React.Component {
   render () {
+    const { title } = this.props
     return <div className={styles.container}>
-      {this.t('titles.header')}
+      {title || this.t('titles.header')}
     </div>
   }
 }

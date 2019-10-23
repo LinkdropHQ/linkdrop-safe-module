@@ -1,0 +1,28 @@
+@import "variables";
+
+.container {
+  text-align: center;
+}
+
+.loading {
+  margin: 0 auto 30px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.note {
+  color: $greyColor;
+  font-size: 14px;
+
+  a {
+    color: $greyColor;
+  }
+}

@@ -12,9 +12,9 @@ import Footer from './footer'
 @translate('pages.page')
 class Page extends React.Component {
   render () {
-    const { children } = this.props
+    const { children, title } = this.props
     return <div className={styles.container}>
-      <Header />
+      <Header title={title} />
       <div
         className={styles.main}
         style={{ height: 'calc(100vh - 130px)' }}

@@ -1,0 +1,12 @@
+@import "variables";
+
+.container {
+  background: $dbBlue;
+  max-width: 300px;
+  min-width: 300px;
+  transition: opacity .3s;
+
+  &:hover {
+    opacity: .7;
+  }
+}
