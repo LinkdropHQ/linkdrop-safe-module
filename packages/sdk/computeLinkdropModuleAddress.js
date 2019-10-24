@@ -21,7 +21,7 @@ export const computeLinkdropModuleAddress = ({
   linkdropModuleMasterCopy,
   deployer
 }) => {
-  assert.string(owner, 'Owner address is required')
+  assert.array(owners, 'Owner addresses are required')
   assert.string(
     linkdropModuleMasterCopy,
     'Linkdrop module mastercopy address is required'
