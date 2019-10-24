@@ -12,12 +12,12 @@ const BYTES_ZERO = '0x'
 
 /**
  * Function to precompute linkdrop module address
- * @param {String} owner Safe owner's address
+ * @param {String} owners Safe owners addresses arrays
  * @param {String} linkdropModuleMasterCopy Deployed linkdrop module mastercopy address
  * @param {String} deployer Deployer address
  */
 export const computeLinkdropModuleAddress = ({
-  owner,
+  owners,
   linkdropModuleMasterCopy,
   deployer
 }) => {
@@ -29,7 +29,7 @@ export const computeLinkdropModuleAddress = ({
   assert.string(deployer, 'Deployer address is required')
 
   const linkdropModuleSetupData = encodeParams(LinkdropModule.abi, 'setup', [
-    [owner]
+    owners
   ])
 
   const constructorData = ethers.utils.defaultAbiCoder.encode(
@@ -37,7 +37,10 @@ export const computeLinkdropModuleAddress = ({
     [linkdropModuleMasterCopy]
   )
 
-  const encodedNonce = ethers.utils.defaultAbiCoder.encode(['uint256'], [owner])
+  const encodedNonce = ethers.utils.defaultAbiCoder.encode(
+    ['uint256'],
+    [owners[0]]
+  )
 
   const salt = ethers.utils.keccak256(
     ethers.utils.keccak256(linkdropModuleSetupData) + encodedNonce.slice(2)
