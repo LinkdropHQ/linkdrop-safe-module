@@ -7,6 +7,10 @@ class User {
     this.actions.dispatch({ type: 'USER.SET_LOCALE', payload: { locale } })
   }
 
+  setWalletConnectData ({ chainId, accounts }) {
+    this.actions.dispatch({ type: '*USER.SET_WALLET_CONNECT_DATA', payload: { chainId, accounts } })
+  }
+
   setStep ({ step }) {
     this.actions.dispatch({ type: 'USER.SET_STEP', payload: { step } })
   }

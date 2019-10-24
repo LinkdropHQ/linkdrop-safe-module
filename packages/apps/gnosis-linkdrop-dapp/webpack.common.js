@@ -95,6 +95,9 @@ module.exports = {
       loader: 'url-loader?limit=100000'
     }]
   },
+  node: {
+    fs: 'empty'
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({

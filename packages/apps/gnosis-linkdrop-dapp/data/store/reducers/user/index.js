@@ -6,7 +6,8 @@ const initialState = {
   loading: false,
   errors: [],
   sdk: null,
-  chainId: null
+  chainId: null,
+  currentAccount: null
 }
 
 export default (state = initialState, action = {}) => {
@@ -23,5 +24,6 @@ const ACTIONS = {
   'USER.SET_LOADING': reducers.setLoading,
   'USER.SET_ERRORS': reducers.setErrors,
   'USER.SET_SDK': reducers.setSdk,
-  'USER.SET_CHAIN_ID': reducers.setChainId
+  'USER.SET_CHAIN_ID': reducers.setChainId,
+  'USER.SET_CURRENT_ACCOUNT': reducers.setCurrentAccount
 }
