@@ -92,7 +92,7 @@ export const getEnableLinkdropModuleData = async ({
   const linkdropModuleCreationData = encodeParams(
     ProxyFactory.abi,
     'createProxyWithNonce',
-    [linkdropModuleMasterCopy, linkdropModuleSetupData, owners[0].address]
+    [linkdropModuleMasterCopy, linkdropModuleSetupData, owners[0]]
   )
 
   const modulesCreationData = encodeDataForCreateAndAddModules([
