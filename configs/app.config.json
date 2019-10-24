@@ -1,0 +1,8 @@
+{
+  "claimHost":"http://localhost:5000",
+  "masterCopy":"0x2f9Df93ebF334443c5719f01000f777749a3f99c",
+  "factory":"0xBa051891B752ecE3670671812486fe8dd34CC1c8",
+  "infuraPk": "ecd43c9cd96e45ceb9131fba9b100b07",
+  "defaultChainId": "4",
+  "apiHost": "https://safe.linkdrop.io"
+}
