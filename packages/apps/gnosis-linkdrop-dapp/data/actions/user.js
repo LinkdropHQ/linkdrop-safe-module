@@ -11,6 +11,10 @@ class User {
     this.actions.dispatch({ type: '*USER.SET_WALLET_CONNECT_DATA', payload: { chainId, accounts } })
   }
 
+  enableModule () {
+    this.actions.dispatch({ type: '*USER.ENABLE_MODULE' })
+  }
+
   setStep ({ step }) {
     this.actions.dispatch({ type: 'USER.SET_STEP', payload: { step } })
   }
@@ -23,8 +27,8 @@ class User {
     this.actions.dispatch({ type: 'USER.SET_ERRORS', payload: { errors } })
   }
 
-  createSdk ({ linkdropMasterAddress }) {
-    this.actions.dispatch({ type: '*USER.CREATE_SDK', payload: { linkdropMasterAddress } })
+  initializeSdk () {
+    this.actions.dispatch({ type: '*USER.INITIALIZE_SDK' })
   }
 
   setChainId ({ chainId }) {

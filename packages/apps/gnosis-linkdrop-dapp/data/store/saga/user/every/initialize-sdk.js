@@ -2,22 +2,19 @@ import { put, select } from 'redux-saga/effects'
 import { initializeSdk } from 'data/sdk'
 import { defineNetworkName } from '@linkdrop/commons'
 import config from 'app.config.js'
-import { getApiHost, getApiHostWallet } from 'helpers'
 
 const generator = function * ({ payload }) {
   try {
-    const { linkdropMasterAddress } = payload
     const chainId = yield select(generator.selectors.chainId)
-    const { factory, infuraPk } = config
-    const networkName = defineNetworkName({ chainId })
-    const apiHost = getApiHostWallet({ chainId })
-    const sdk = initializeSdk({
-      chain: networkName,
-      infuraPk: config.infuraPk,
-      apiHost
-    })
+    const { infuraPk, apiHost, claimHost } = config
+    const chain = defineNetworkName({ chainId })
 
-    yield put({ type: 'USER.SET_CHAIN_ID', payload: { chainId } })
+    const sdk = initializeSdk({
+      chain,
+      jsonRpcUrl: `https://${chain}.infura.io/v3/${infuraPk}`,
+      apiHost,
+      claimHost
+    })
     yield put({ type: 'USER.SET_SDK', payload: { sdk } })
   } catch (e) {
     console.error(e)

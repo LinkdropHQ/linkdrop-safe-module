@@ -1,9 +1,10 @@
-import LinkdropSDK from '@linkdrop/safe-module-sdk'
+import SDK from '@linkdrop/safe-module-sdk'
 
-export default ({ linkdropMasterAddress, chain, jsonRpcUrl, apiHost, factoryAddress }) => new LinkdropSDK({
-  linkdropMasterAddress,
-  chain,
-  jsonRpcUrl,
-  apiHost,
-  factoryAddress
-})
+export default ({ chain, jsonRpcUrl, apiHost, claimHost }) => {
+  return new SDK({
+    chain,
+    apiHost,
+    claimHost,
+    jsonRpcUrl
+  })
+}

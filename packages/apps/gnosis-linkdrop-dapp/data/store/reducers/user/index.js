@@ -7,7 +7,7 @@ const initialState = {
   errors: [],
   sdk: null,
   chainId: null,
-  currentAccount: null
+  safe: null
 }
 
 export default (state = initialState, action = {}) => {
@@ -25,5 +25,5 @@ const ACTIONS = {
   'USER.SET_ERRORS': reducers.setErrors,
   'USER.SET_SDK': reducers.setSdk,
   'USER.SET_CHAIN_ID': reducers.setChainId,
-  'USER.SET_CURRENT_ACCOUNT': reducers.setCurrentAccount
+  'USER.SET_SAFE': reducers.setSafe
 }

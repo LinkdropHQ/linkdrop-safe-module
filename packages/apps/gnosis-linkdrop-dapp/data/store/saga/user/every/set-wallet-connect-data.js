@@ -8,7 +8,7 @@ const generator = function * ({ payload }) {
   try {
     const { chainId, accounts } = payload
     yield put({ type: 'USER.SET_CHAIN_ID', payload: { chainId } })
-    yield put({ type: 'USER.SET_CURRENT_ACCOUNT', payload: { account: accounts[0] } })
+    yield put({ type: 'USER.SET_SAFE', payload: { safe: accounts[0] } })
     if (chainId && accounts && accounts[0]) {
       window.location.href = '/#/activate'
     }
@@ -41,5 +41,5 @@ const generator = function * ({ payload }) {
 
 export default generator
 generator.selectors = {
-  step: ({ user: { step } }) => step
+  sdk: ({ user: { sdk } }) => sdk
 }
