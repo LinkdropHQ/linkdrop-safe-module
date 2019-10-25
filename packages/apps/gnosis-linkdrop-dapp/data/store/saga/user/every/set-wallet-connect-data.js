@@ -1,41 +1,44 @@
-/* global web3 */
-import { put } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
-import initializeSdk from 'data/sdk'
-import { defineNetworkName, defineJsonRpcUrl } from '@linkdrop/commons'
+import { put, select } from 'redux-saga/effects'
+import isLinkdropModuleEnabled from './is-linkdrop-module-enabled'
+import initializeSdk from './initialize-sdk'
+import isGnosisSafe from './is-gnosis-safe'
 
 const generator = function * ({ payload }) {
   try {
-    const { chainId, accounts } = payload
+    yield put({ type: 'USER.SET_LOADING', payload: { loading: true } })
+    const { chainId, accounts, walletConnector } = payload
     yield put({ type: 'USER.SET_CHAIN_ID', payload: { chainId } })
     yield put({ type: 'USER.SET_SAFE', payload: { safe: accounts[0] } })
-    if (chainId && accounts && accounts[0]) {
-      window.location.href = '/#/activate'
+    yield put({ type: 'USER.SET_WALLET_CONNECTOR', payload: { walletConnector } })
+    const sdk = yield select(generator.selectors.sdk)
+    // if no arguments passed  - then just set values to default and return
+    if (!chainId || !accounts || !accounts[0]) {
+      return yield put({ type: 'USER.SET_LOADING', payload: { loading: false } })
+    }
+    // if no sdk - create it
+    if (!sdk) {
+      yield initializeSdk()
     }
 
-    // window.addressChangeInterval && window.clearInterval(window.addressChangeInterval)
-    // const networkName = defineNetworkName({ chainId: networkVersion })
-    // const jsonRpcUrl = defineJsonRpcUrl({ chainId: networkVersion, infuraPk, jsonRpcUrlXdai })
-    // const sdk = initializeSdk({
-    //   claimHost,
-    //   factoryAddress: factory,
-    //   chainId: networkName,
-    //   linkdropMasterAddress: selectedAddress,
-    //   jsonRpcUrl,
-    //   apiHost: `https://${networkName}.linkdrop.io`
-    // })
-    // yield put({ type: 'USER.SET_SDK', payload: { sdk } })
-    // yield put({ type: 'USER.SET_CURRENT_ADDRESS', payload: { currentAddress: selectedAddress } })
-    // yield put({ type: 'USER.SET_CHAIN_ID', payload: { chainId: networkVersion } })
-    // yield put({ type: 'USER.SET_LOADING', payload: { loading: false } })
-    // window.addressChangeInterval = window.setInterval(() => {
-    //   const currentMetamaskAddress = web3.eth.accounts[0]
-    //   if (selectedAddress !== currentMetamaskAddress) {
-    //     window.location.reload()
-    //   }
-    // }, 2000)
+    // if address is not gnosis safe - show error
+    const isSafe = yield isGnosisSafe()
+    if (!isSafe) {
+      throw new Error('Address passed as argument is not a Gnosis safe')
+    }
+
+    // if module was enabled previously - go to create link-page. if not - activate page
+    const isModuleEnabled = yield isLinkdropModuleEnabled()
+    if (chainId && accounts && accounts[0]) {
+      if (isModuleEnabled) {
+        window.location.href = '/#/create-link'
+      } else {
+        window.location.href = '/#/activate'
+      }
+    }
+    yield put({ type: 'USER.SET_LOADING', payload: { loading: false } })
   } catch (e) {
     console.error(e)
+    yield put({ type: 'USER.SET_LOADING', payload: { loading: false } })
   }
 }
 

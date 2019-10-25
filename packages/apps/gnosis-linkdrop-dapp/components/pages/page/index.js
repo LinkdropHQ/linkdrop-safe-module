@@ -5,12 +5,20 @@ import Header from './header'
 import Footer from './footer'
 
 @actions(({
-  user: { chainId }
+  user: { chainId, safe }
 }) => ({
-  chainId
+  chainId,
+  safe
 }))
 @translate('pages.page')
 class Page extends React.Component {
+  componentDidMount () {
+    const { chainId, safe } = this.props
+    if (!chainId || !safe) {
+      window.location.href = '/#/'
+    }
+  }
+
   render () {
     const { children, title } = this.props
     return <div className={styles.container}>

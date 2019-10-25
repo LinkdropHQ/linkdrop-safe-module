@@ -3,7 +3,7 @@ import { initializeSdk } from 'data/sdk'
 import { defineNetworkName } from '@linkdrop/commons'
 import config from 'app.config.js'
 
-const generator = function * ({ payload }) {
+const generator = function * () {
   try {
     const chainId = yield select(generator.selectors.chainId)
     const { infuraPk, apiHost, claimHost } = config
@@ -18,7 +18,6 @@ const generator = function * ({ payload }) {
     yield put({ type: 'USER.SET_SDK', payload: { sdk } })
   } catch (e) {
     console.error(e)
-    yield put({ type: 'USER.SET_ERRORS', payload: { errors: ['LINK_INVALID'] } })
   }
 }
 

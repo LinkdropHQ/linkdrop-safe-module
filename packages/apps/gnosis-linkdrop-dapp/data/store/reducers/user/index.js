@@ -7,7 +7,8 @@ const initialState = {
   errors: [],
   sdk: null,
   chainId: null,
-  safe: null
+  safe: null,
+  setWalletConnector: null
 }
 
 export default (state = initialState, action = {}) => {
@@ -25,5 +26,6 @@ const ACTIONS = {
   'USER.SET_ERRORS': reducers.setErrors,
   'USER.SET_SDK': reducers.setSdk,
   'USER.SET_CHAIN_ID': reducers.setChainId,
-  'USER.SET_SAFE': reducers.setSafe
+  'USER.SET_SAFE': reducers.setSafe,
+  'USER.SET_WALLET_CONNECTOR': reducers.setWalletConnector
 }

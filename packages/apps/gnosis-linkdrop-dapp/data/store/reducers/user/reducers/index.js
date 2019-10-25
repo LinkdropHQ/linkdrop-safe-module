@@ -4,6 +4,7 @@ import setErrors from './set-errors'
 import setSdk from './set-sdk'
 import setChainId from './set-chain-id'
 import setSafe from './set-safe'
+import setWalletConnector from './set-wallet-connector'
 
 export default {
   setLocale,
@@ -11,5 +12,6 @@ export default {
   setErrors,
   setSdk,
   setSafe,
-  setChainId
+  setChainId,
+  setWalletConnector
 }

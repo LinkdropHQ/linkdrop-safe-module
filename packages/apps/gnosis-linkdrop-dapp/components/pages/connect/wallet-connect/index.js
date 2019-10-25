@@ -19,7 +19,7 @@ class WalletConnectComponent extends React.Component {
 
     if (!this.walletConnector.connected) {
       this.walletConnector.createSession().then(() => {
-        this.state({
+        this.setState({
           uri: this.walletConnector.uri
         })
       })
@@ -27,7 +27,7 @@ class WalletConnectComponent extends React.Component {
 
     if (this.walletConnector.connected) {
       const { _chainId: chainId, accounts } = this.walletConnector
-      this.actions().user.setWalletConnectData({ chainId, accounts })
+      this.actions().user.setWalletConnectData({ chainId, accounts, walletConnector: this.walletConnector })
     }
 
     this.walletConnector.on('connect', (error, payload) => {
@@ -40,7 +40,7 @@ class WalletConnectComponent extends React.Component {
 
       // Get provided accounts and chainId
       const { accounts, chainId } = payload.params[0]
-      this.actions().user.setWalletConnectData({ chainId, accounts })
+      this.actions().user.setWalletConnectData({ chainId, accounts, walletConnector: this.walletConnector })
     })
 
     this.walletConnector.on('session_update', (error, payload) => {
@@ -51,7 +51,7 @@ class WalletConnectComponent extends React.Component {
 
       // Get updated accounts and chainId
       const { accounts, chainId } = payload.params[0]
-      this.actions().user.setWalletConnectData({ chainId, accounts })
+      this.actions().user.setWalletConnectData({ chainId, accounts, walletConnector: this.walletConnector })
     })
 
     this.walletConnector.on('disconnect', (error, payload) => {
@@ -60,19 +60,19 @@ class WalletConnectComponent extends React.Component {
         throw error
       }
 
-      this.actions().user.setWalletConnectData({ chainId: null, accounts: null })
+      this.actions().user.setWalletConnectData({ chainId: null, accounts: null, walletConnector: null })
     })
   }
 
   showModalWindow () {
     const { uri } = this.state
     WalletConnectQRCodeModal.open(uri, () => {
-      console.log('QR Code Modal closed')
+      console.log('QR Code Modal opened')
     })
   }
 
   render () {
-    const { uri } = this.props
+    const { uri } = this.state
     return <Button
       disabled={!uri}
       loading={!uri}

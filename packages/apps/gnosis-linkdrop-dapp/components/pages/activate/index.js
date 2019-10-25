@@ -4,21 +4,11 @@ import { translate, actions } from 'decorators'
 import styles from './styles.module'
 import { Button } from 'components/common'
 
-@actions(({ user: { sdk, chainId } }) => ({ sdk, chainId }))
+@actions(({ user: { sdk, chainId, loading } }) => ({ sdk, chainId, loading }))
 @translate('pages.activate')
 class Activate extends React.Component {
-  componentDidMount () {
-    const { sdk, chainId } = this.props
-    if (!chainId) {
-      window.location.href = '/#/'
-      return
-    }
-    if (!sdk) {
-      this.actions().user.initializeSdk()
-    }
-  }
-
   render () {
+    const { loading } = this.props
     return <Page>
       <div
         className={styles.title}
@@ -28,7 +18,7 @@ class Activate extends React.Component {
         className={styles.subtitle}
         dangerouslySetInnerHTML={{ __html: this.t('titles.activate') }}
       />
-      <Button onClick={_ => this.actions().user.enableModule()}>{this.t('buttons.activate')}</Button>
+      <Button loading={loading} onClick={_ => this.actions().user.enableModule()}>{this.t('buttons.activate')}</Button>
     </Page>
   }
 }
